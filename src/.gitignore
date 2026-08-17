@@ -1,0 +1,18 @@
+# Archivos compilados y binarios de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Carpeta de compilación de NetBeans / Ant / Maven / Gradle
+/build/
+/dist/
+/nbproject/private/
+/nbproject/project.fragment
+/target/
+/.gradle/
+
+# Archivos de configuración local o del sistema
+.DS_Store
+Thumbs.db
+*.log

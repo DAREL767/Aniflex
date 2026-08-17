@@ -1,0 +1,12 @@
+Interfaz\GUIListarContenido.class
+Interfaz\GUIAdicionarSerie.class
+com\mycompany\aniflex\ANIFLEX$1.class
+Interfaz\GUIPrincipal.class
+Servicio\ServicioPelicula.class
+Interfaz\GUIAdicionarPelicula.class
+Model\Pelicula.class
+Model\Serie.class
+Model\Contenido.class
+com\mycompany\aniflex\ANIFLEX.class
+Interfaz\GUIDeveloper.class
+Servicio\ServicioSerie.class
