@@ -1,0 +1,15 @@
+Model\Episodio.class
+Interfaz\GUIListarPelicula.class
+Servicio\ServicioPelicula.class
+Model\Pelicula.class
+Model\Serie.class
+com\mycompany\aniflex\ANIFLEX.class
+Model\IEAlquiler.class
+Interfaz\GUIAdicionarSerie.class
+com\mycompany\aniflex\ANIFLEX$1.class
+Interfaz\GUIPrincipal.class
+Interfaz\GUIAdicionarPelicula.class
+Interfaz\GUIListarSerie.class
+Model\Contenido.class
+Interfaz\GUIDeveloper.class
+Servicio\ServicioSerie.class

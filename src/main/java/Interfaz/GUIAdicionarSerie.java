@@ -69,25 +69,32 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
         jLabel8.setText("REGISTRAR SERIE");
 
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel2.setText("ID:");
 
+        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel1.setText("Título:");
 
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel3.setText("Duración Promedio:");
 
         txtDuracion.addActionListener(this::txtDuracionActionPerformed);
 
+        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel4.setText("Calificación:");
 
+        jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Estreno:");
 
         txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
 
+        jLabel6.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel6.setText("Temporadas:");
 
         txtTemporadas.addActionListener(this::txtTemporadasActionPerformed);
 
-        jLabel7.setText("Episodios Por Temporada:");
+        jLabel7.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel7.setText("Total Episodios:");
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -116,7 +123,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
                     .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEpisodiosPorTemporada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
                 .addGap(71, 71, 71))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -162,7 +169,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEpisodiosPorTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,6 +198,15 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         // 2. Parsear Numéricos
         int duracionMinutos = Integer.parseInt(txtDuracion.getText().trim());
         double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
+        
+        if (calificacion < 0.0 || calificacion > 10.0) {
+    JOptionPane.showMessageDialog(this, 
+        "La calificación debe estar entre 0.0 y 10.0", 
+        "Calificación Inválida", 
+        JOptionPane.WARNING_MESSAGE);
+    return;
+}
+        
         int temporadas = Integer.parseInt(txtTemporadas.getText().trim());
         int episodiosPorTemporada = Integer.parseInt(txtEpisodiosPorTemporada.getText().trim());
 

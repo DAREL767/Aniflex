@@ -33,16 +33,26 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jDeveloper = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jAdicionarContenido = new javax.swing.JMenuItem();
-        jListarContenido = new javax.swing.JMenuItem();
+        jAdicionarPelicula = new javax.swing.JMenuItem();
+        jListarPelicula = new javax.swing.JMenuItem();
+        jBuscarPelicula = new javax.swing.JMenuItem();
+        jEliminarPelicula = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jAdicionarSerie = new javax.swing.JMenuItem();
+        jListarSerie = new javax.swing.JMenuItem();
+        jBuscarSerie = new javax.swing.JMenuItem();
+        jEliminarSerie = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio");
@@ -55,17 +65,42 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Contenido");
+        jMenu2.setText("Película");
 
-        jAdicionarContenido.setText("Adicionar");
-        jAdicionarContenido.addActionListener(this::jAdicionarContenidoActionPerformed);
-        jMenu2.add(jAdicionarContenido);
+        jAdicionarPelicula.setText("Adicionar");
+        jAdicionarPelicula.addActionListener(this::jAdicionarPeliculaActionPerformed);
+        jMenu2.add(jAdicionarPelicula);
 
-        jListarContenido.setText("Listar");
-        jListarContenido.addActionListener(this::jListarContenidoActionPerformed);
-        jMenu2.add(jListarContenido);
+        jListarPelicula.setText("Listar");
+        jListarPelicula.addActionListener(this::jListarPeliculaActionPerformed);
+        jMenu2.add(jListarPelicula);
+
+        jBuscarPelicula.setText("Buscar");
+        jBuscarPelicula.addActionListener(this::jBuscarPeliculaActionPerformed);
+        jMenu2.add(jBuscarPelicula);
+
+        jEliminarPelicula.setText("Eliminar");
+        jMenu2.add(jEliminarPelicula);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Serie");
+
+        jAdicionarSerie.setText("Adicionar");
+        jAdicionarSerie.addActionListener(this::jAdicionarSerieActionPerformed);
+        jMenu3.add(jAdicionarSerie);
+
+        jListarSerie.setText("Listar");
+        jListarSerie.addActionListener(this::jListarSerieActionPerformed);
+        jMenu3.add(jListarSerie);
+
+        jBuscarSerie.setText("Buscar");
+        jMenu3.add(jBuscarSerie);
+
+        jEliminarSerie.setText("Eliminar");
+        jMenu3.add(jEliminarSerie);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -89,37 +124,29 @@ public class GUIPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jDeveloperActionPerformed
 
-    private void jAdicionarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarContenidoActionPerformed
-        Object[] opciones = {"Película", "Serie", "Cancelar"};
-
-        // 2. Muestra la ventana emergente de selección
-        int seleccion = javax.swing.JOptionPane.showOptionDialog(
-            this,
-            "¿Qué tipo de contenido deseas adicionar?",
-            "Seleccionar tipo de contenido",
-            javax.swing.JOptionPane.YES_NO_CANCEL_OPTION,
-            javax.swing.JOptionPane.QUESTION_MESSAGE,
-            null,
-            opciones,
-            opciones[0]
-        );
-
-        // 3. Abrir la ventana según la opción elegida
-        if (seleccion == 0) {
-            // Seleccionó "Película"
-            GUIAdicionarPelicula guiPeli = new GUIAdicionarPelicula();
-            guiPeli.setVisible(true);
-        } else if (seleccion == 1) {
-            // Seleccionó "Serie"
-            GUIAdicionarSerie guiSerie = new GUIAdicionarSerie();
-            guiSerie.setVisible(true);
-        }
-    }//GEN-LAST:event_jAdicionarContenidoActionPerformed
-
-    private void jListarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarContenidoActionPerformed
-        GUIListarContenido ventana = new GUIListarContenido ();
+    private void jAdicionarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarPeliculaActionPerformed
+        GUIAdicionarPelicula ventana = new GUIAdicionarPelicula ();
         ventana.setVisible(true);
-    }//GEN-LAST:event_jListarContenidoActionPerformed
+    }//GEN-LAST:event_jAdicionarPeliculaActionPerformed
+
+    private void jListarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarPeliculaActionPerformed
+        GUIListarPelicula ventana = new GUIListarPelicula ();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jListarPeliculaActionPerformed
+
+    private void jBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarPeliculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBuscarPeliculaActionPerformed
+
+    private void jAdicionarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarSerieActionPerformed
+        GUIAdicionarSerie ventana = new GUIAdicionarSerie ();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jAdicionarSerieActionPerformed
+
+    private void jListarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListarSerieActionPerformed
+        GUIListarSerie ventana = new GUIListarSerie ();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jListarSerieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,13 +174,21 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem jAdicionarContenido;
+    private javax.swing.JMenuItem jAdicionarPelicula;
+    private javax.swing.JMenuItem jAdicionarSerie;
+    private javax.swing.JMenuItem jBuscarPelicula;
+    private javax.swing.JMenuItem jBuscarSerie;
     private javax.swing.JMenuItem jDeveloper;
-    private javax.swing.JMenuItem jListarContenido;
+    private javax.swing.JMenuItem jEliminarPelicula;
+    private javax.swing.JMenuItem jEliminarSerie;
+    private javax.swing.JMenuItem jListarPelicula;
+    private javax.swing.JMenuItem jListarSerie;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

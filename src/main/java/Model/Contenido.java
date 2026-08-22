@@ -65,5 +65,6 @@ public abstract class Contenido {
     }
 
     public abstract String getDetalles();
+    public abstract double calcularRetencion ();
 
 }

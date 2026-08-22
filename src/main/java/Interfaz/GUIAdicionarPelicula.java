@@ -5,6 +5,8 @@
 package Interfaz;
 
 import Model.Pelicula;
+import Servicio.ServicioPelicula;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -33,8 +35,6 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
     txtDuracion.setText("");
     txtCalificacion.setText("");
     txtFechaEstreno.setText("");
-    if (txtDirector != null) txtDirector.setText("");
-    if (txtPresupuesto != null) txtPresupuesto.setText("");
   
 }
 
@@ -52,40 +52,39 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         txtID1 = new javax.swing.JTextField();
         txtDuracion = new javax.swing.JTextField();
         txtCalificacion = new javax.swing.JTextField();
         txtFechaEstreno = new javax.swing.JTextField();
-        txtDirector = new javax.swing.JTextField();
-        txtPresupuesto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtRecaudacion = new javax.swing.JTextField();
+        cmbEsSaga = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar Pelicula");
 
+        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel1.setText("Título:");
 
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel2.setText("ID:");
 
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel3.setText("Duración:");
 
+        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel4.setText("Calificación:");
 
+        jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Estreno:");
-
-        jLabel6.setText("Director:");
-
-        jLabel7.setText("Presupuesto:");
 
         txtDuracion.addActionListener(this::txtDuracionActionPerformed);
 
         txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
-
-        txtDirector.addActionListener(this::txtDirectorActionPerformed);
 
         jLabel8.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
         jLabel8.setText("REGISTRAR PELÍCULA");
@@ -94,46 +93,55 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
+        jLabel9.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel9.setText("Saga: ");
+
+        jLabel10.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel10.setText("Recaudación Taquilla: ");
+
+        txtRecaudacion.setToolTipText("0 si salio exclusivamente para plataformas");
+
+        cmbEsSaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sí", "No" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(176, 176, 176))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18))
+                        .addGap(105, 105, 105)
+                        .addComponent(cmbEsSaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(48, 48, 48)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(25, 25, 25))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtDirector, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtID1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPresupuesto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addGap(82, 82, 82))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(189, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(176, 176, 176))
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRecaudacion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtID1)
+                                    .addComponent(txtTitulo)
+                                    .addComponent(txtDuracion)
+                                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(40, 40, 40)
+                        .addComponent(btnGuardar)
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +160,7 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,15 +169,15 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDirector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbEsSaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtPresupuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel10)
+                    .addComponent(txtRecaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,49 +187,74 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDuracionActionPerformed
 
-    private void txtDirectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirectorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDirectorActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-        // 1. Extraer Strings directos
+        // 1. Capturar datos de los campos de texto base
         String id = txtID1.getText().trim();
         String titulo = txtTitulo.getText().trim();
-        String director = txtDirector.getText().trim();
+        String duracionStr = txtDuracion.getText().trim();
+        String calificacionStr = txtCalificacion.getText().trim();
+        String fechaStr = txtFechaEstreno.getText().trim(); // Formato esperado: dd/MM/yyyy
+        
+        // 2. Capturar y parsear los nuevos atributos exclusivos
+        String taquillaStr = txtRecaudacion.getText().trim();
+        
+        // JComboBox para esSaga ("Sí" / "No")
+        String sagaSeleccion = cmbEsSaga.getSelectedItem().toString();
+        boolean esSaga = sagaSeleccion.equalsIgnoreCase("Sí");
 
-        // Validar que los campos de texto no estén vacíos
-        if (id.isEmpty() || titulo.isEmpty() || director.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos de texto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        // 3. Validar que ningún campo esté vacío
+        if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty() || 
+            calificacionStr.isEmpty() || fechaStr.isEmpty() || taquillaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 2. Parsear Numéricos
-        int duracionMinutos = Integer.parseInt(txtDuracion.getText().trim());
-        double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
-        double presupuesto = Double.parseDouble(txtPresupuesto.getText().trim());
-
-        // 3. Parsear Fecha (dd/MM/yyyy)
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false); // Exige formato exacto
-        Date fechaEstreno = sdf.parse(txtFechaEstreno.getText().trim());
-
-        // 4. Instanciar el objeto Pelicula
-        Pelicula nuevaPelicula = new Pelicula(id, titulo, duracionMinutos, calificacion, fechaEstreno, director, presupuesto);
-        Servicio.ServicioPelicula.adicionar(nuevaPelicula);
-
-        // TODO: En el siguiente paso pasaremos 'nuevaPelicula' al Servicio/Map
-        JOptionPane.showMessageDialog(this, "¡Película creada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        // 4. Parsear tipos de datos numéricos
+        int duracion = Integer.parseInt(duracionStr);
+        double calificacion = Double.parseDouble(calificacionStr);
         
-        // Limpiar campos o cerrar ventana
-        limpiarCampos();
+        if (calificacion < 0.0 || calificacion > 10.0) {
+    JOptionPane.showMessageDialog(this, 
+        "La calificación debe ser un valor entre 0.0 y 10.0", 
+        "Calificación Inválida", 
+        JOptionPane.WARNING_MESSAGE);
+    return; // Cancela el guardado para que corrija la nota
+}
+        
+        double recaudacionTaquilla = Double.parseDouble(taquillaStr);
+
+        // 5. Parsear fecha
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaEstreno = sdf.parse(fechaStr);
+
+        // 6. Instanciar la Película con el nuevo constructor
+        Pelicula nuevaPelicula = new Pelicula(
+            id, 
+            titulo, 
+            duracion, 
+            calificacion, 
+            fechaEstreno, 
+            esSaga, 
+            recaudacionTaquilla
+        );
+
+        // 7. Enviar al Servicio/Controlador
+        boolean exito = ServicioPelicula.adicionar(nuevaPelicula);
+
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Película guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Ya existe una película registrada con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error en los datos numéricos (Duración, Calificación o Presupuesto). Verifique que ingresó números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-    } catch (java.text.ParseException e) {
-        JOptionPane.showMessageDialog(this, "Error en la Fecha de Estreno. Use el formato exacto: dd/MM/yyyy", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "La duración, calificación y taquilla deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+    } catch (ParseException e) {
+        JOptionPane.showMessageDialog(this, "La fecha debe tener el formato dd/MM/yyyy.", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Ocurrió un error insospechado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -252,20 +285,20 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<String> cmbEsSaga;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtCalificacion;
-    private javax.swing.JTextField txtDirector;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtFechaEstreno;
     private javax.swing.JTextField txtID1;
-    private javax.swing.JTextField txtPresupuesto;
+    private javax.swing.JTextField txtRecaudacion;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

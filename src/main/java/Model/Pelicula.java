@@ -2,44 +2,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
-import java.util.Date;
+
 
 /**
  *
  * @author jamed
  */
-public class Pelicula extends Contenido {
-    
-    private String director;
-    private double presupuesto;
+package Model;
+import java.util.Date;
 
-    public Pelicula(String id, String titulo, int duracionMinutos, double calificacion, Date fechaEstreno, String director, double presupuesto) {
+public class Pelicula extends Contenido implements IEAlquiler {
+    private boolean esSaga;
+    private double recaudacionTaquilla;
 
-        super(id, titulo, duracionMinutos, calificacion, fechaEstreno); 
-        this.director = director;
-        this.presupuesto = presupuesto;
+    public Pelicula(String id, String titulo, int duracionMinutos, double calificacion, Date fechaEstreno, boolean esSaga, double recaudacionTaquilla) {
+        super(id, titulo, duracionMinutos, calificacion, fechaEstreno);
+        this.esSaga = esSaga;
+        this.recaudacionTaquilla = recaudacionTaquilla;
     }
 
-    public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public double getPresupuesto() {
-        return presupuesto;
-    }
-
-    public void setPresupuesto(double presupuesto) {
-        this.presupuesto = presupuesto;
+    // --- ESTE MÉTODO ES EL QUE CONTRARRESTA EL ERROR DE LA INTERFAZ ---
+    @Override
+    public double calcularAlquiler() {
+        return esSaga ? 5000.0 : 3500.0;
     }
 
     @Override
-    public String getDetalles() {
-        return "Director: " + director + " | Presupuesto: $" + presupuesto + " | Calificación: " + getCalificacion() + " | Fecha de estreno: " + getFechaEstreno();
-    }
+public String getDetalles() {
+    return "🎬 [PELÍCULA] " + getTitulo() + 
+           " | ID: " + getId() + 
+           " | Duración: " + getDuracionMinutos() + " min" + 
+           " | Calificación: " + getCalificacion() + "★" + 
+           " | Estreno: " + getFechaEstreno() + 
+           " | Es Saga: " + (esSaga ? "Sí" : "No") + 
+           " | Taquilla: $" + String.format("%.2f", recaudacionTaquilla) + 
+           " | Retención: " + String.format("%.2f", calcularRetencion()) + " pts" +
+           " | Alquiler: $" + String.format("%.2f", calcularAlquiler());
+}
 
+public double calcularRetencion() {
+    double horas = getDuracionMinutos() / 60.0;
+    return getCalificacion() * (1 + (horas * 0.1));
+}
+
+    // Getters y Setters
+    public boolean isEsSaga() { return esSaga; }
+    public void setEsSaga(boolean esSaga) { this.esSaga = esSaga; }
+
+    public double getRecaudacionTaquilla() { return recaudacionTaquilla; }
+    public void setRecaudacionTaquilla(double recaudacionTaquilla) { this.recaudacionTaquilla = recaudacionTaquilla; }
 }
