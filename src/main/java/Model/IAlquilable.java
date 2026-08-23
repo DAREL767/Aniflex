@@ -8,6 +8,6 @@ package Model;
  *
  * @author jamed
  */
-public interface IEAlquiler {
+public interface IAlquilable {
     double calcularAlquiler();
 }

@@ -11,7 +11,7 @@
 package Model;
 import java.util.Date;
 
-public class Pelicula extends Contenido implements IEAlquiler {
+public class Pelicula extends Contenido implements IAlquilable {
     private boolean esSaga;
     private double recaudacionTaquilla;
 
