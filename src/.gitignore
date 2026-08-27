@@ -1,18 +1,27 @@
-# Archivos compilados y binarios de Java
+# Compilación y archivos generados por Maven
+target/
 *.class
 *.jar
 *.war
 *.ear
+*.rar
 
-# Carpeta de compilación de NetBeans / Ant / Maven / Gradle
-/build/
-/dist/
-/nbproject/private/
-/nbproject/project.fragment
-/target/
-/.gradle/
+# Archivos de configuración de NetBeans
+nbproject/private/
+build/
+dist/
+nbproject/project.xml.cfg
+nbproject/project.properties.cfg
 
-# Archivos de configuración local o del sistema
+# Archivos de configuración de IDEs (VS Code / IntelliJ / Eclipse)
+.vscode/
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+
+# Logs y archivos temporales del sistema
+*.log
 .DS_Store
 Thumbs.db
-*.log
