@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -14,9 +15,9 @@ public abstract class Contenido {
     private String titulo;
     private int duracionMinutos;
     private double calificacion;
-    private Date fechaEstreno;
+    private LocalDate fechaEstreno;
 
-    public Contenido(String id, String titulo, int duracionMinutos, double calificacion, Date fechaEstreno) {
+    public Contenido(String id, String titulo, int duracionMinutos, double calificacion, LocalDate fechaEstreno) {
         this.id = id;
         this.titulo = titulo;
         this.duracionMinutos = duracionMinutos;
@@ -56,11 +57,11 @@ public abstract class Contenido {
         this.calificacion = calificacion;
     }
 
-    public Date getFechaEstreno() {
+    public LocalDate getFechaEstreno() {
         return fechaEstreno;
     }
 
-    public void setFechaEstreno(Date fechaEstreno) {
+    public void setFechaEstreno(LocalDate fechaEstreno) {
         this.fechaEstreno = fechaEstreno;
     }
 

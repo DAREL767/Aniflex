@@ -4,6 +4,12 @@
  */
 package Interfaz;
 
+import interfaz.GUIBuscarSerie;
+import interfaz.GUICalcularRetencionPelicula;
+import interfaz.GUICalcularRetencionSerie;
+import interfaz.GUIEliminarPelicula;
+import interfaz.GUIEliminarSerie;
+
 /**
  *
  * @author jamed
@@ -34,19 +40,24 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jDeveloper = new javax.swing.JMenuItem();
+        jMenuItemSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jAdicionarPelicula = new javax.swing.JMenuItem();
         jListarPelicula = new javax.swing.JMenuItem();
         jBuscarPelicula = new javax.swing.JMenuItem();
         jEliminarPelicula = new javax.swing.JMenuItem();
+        jMenuItemCalculoPeli = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jAdicionarSerie = new javax.swing.JMenuItem();
         jListarSerie = new javax.swing.JMenuItem();
         jBuscarSerie = new javax.swing.JMenuItem();
         jEliminarSerie = new javax.swing.JMenuItem();
+        jMenuItemCalculoSerie = new javax.swing.JMenuItem();
+        jMenuAyuda = new javax.swing.JMenu();
+        jMenuItemAcercaDe = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -57,11 +68,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dan\\Documents\\NetBeansProjects\\Aniflex\\src\\main\\resources\\aniflex-logo(1)(1).png")); // NOI18N
+
         jMenu1.setText("Archivo");
 
-        jDeveloper.setText("Developers");
-        jDeveloper.addActionListener(this::jDeveloperActionPerformed);
-        jMenu1.add(jDeveloper);
+        jMenuItemSalir.setText("Salir");
+        jMenuItemSalir.addActionListener(this::jMenuItemSalirActionPerformed);
+        jMenu1.add(jMenuItemSalir);
 
         jMenuBar1.add(jMenu1);
 
@@ -80,7 +93,12 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenu2.add(jBuscarPelicula);
 
         jEliminarPelicula.setText("Eliminar");
+        jEliminarPelicula.addActionListener(this::jEliminarPeliculaActionPerformed);
         jMenu2.add(jEliminarPelicula);
+
+        jMenuItemCalculoPeli.setText("Calcular retención");
+        jMenuItemCalculoPeli.addActionListener(this::jMenuItemCalculoPeliActionPerformed);
+        jMenu2.add(jMenuItemCalculoPeli);
 
         jMenuBar1.add(jMenu2);
 
@@ -95,12 +113,26 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jMenu3.add(jListarSerie);
 
         jBuscarSerie.setText("Buscar");
+        jBuscarSerie.addActionListener(this::jBuscarSerieActionPerformed);
         jMenu3.add(jBuscarSerie);
 
         jEliminarSerie.setText("Eliminar");
+        jEliminarSerie.addActionListener(this::jEliminarSerieActionPerformed);
         jMenu3.add(jEliminarSerie);
 
+        jMenuItemCalculoSerie.setText("Calcular Retención");
+        jMenuItemCalculoSerie.addActionListener(this::jMenuItemCalculoSerieActionPerformed);
+        jMenu3.add(jMenuItemCalculoSerie);
+
         jMenuBar1.add(jMenu3);
+
+        jMenuAyuda.setText("Ayuda");
+
+        jMenuItemAcercaDe.setText("Acerca de");
+        jMenuItemAcercaDe.addActionListener(this::jMenuItemAcercaDeActionPerformed);
+        jMenuAyuda.add(jMenuItemAcercaDe);
+
+        jMenuBar1.add(jMenuAyuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -108,21 +140,21 @@ public class GUIPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jDeveloperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeveloperActionPerformed
-        GUIDeveloper ventana = new GUIDeveloper();
-        ventana.setVisible(true);
-        
-    }//GEN-LAST:event_jDeveloperActionPerformed
 
     private void jAdicionarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarPeliculaActionPerformed
         GUIAdicionarPelicula ventana = new GUIAdicionarPelicula ();
@@ -135,7 +167,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jListarPeliculaActionPerformed
 
     private void jBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarPeliculaActionPerformed
-        // TODO add your handling code here:
+        GUIBuscarPelicula ventana = new GUIBuscarPelicula();
+        ventana.setVisible(true);
     }//GEN-LAST:event_jBuscarPeliculaActionPerformed
 
     private void jAdicionarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarSerieActionPerformed
@@ -147,6 +180,40 @@ public class GUIPrincipal extends javax.swing.JFrame {
         GUIListarSerie ventana = new GUIListarSerie ();
         ventana.setVisible(true);
     }//GEN-LAST:event_jListarSerieActionPerformed
+
+    private void jMenuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaDeActionPerformed
+        GUIAcercaDe ventana = new GUIAcercaDe();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAcercaDeActionPerformed
+
+    private void jMenuItemCalculoSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCalculoSerieActionPerformed
+        GUICalcularRetencionSerie ventana = new GUICalcularRetencionSerie();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCalculoSerieActionPerformed
+
+    private void jMenuItemCalculoPeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCalculoPeliActionPerformed
+        GUICalcularRetencionPelicula ventana = new GUICalcularRetencionPelicula();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCalculoPeliActionPerformed
+
+    private void jBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarSerieActionPerformed
+        GUIBuscarSerie ventana = new GUIBuscarSerie();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jBuscarSerieActionPerformed
+
+    private void jEliminarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarSerieActionPerformed
+        GUIEliminarSerie ventana = new GUIEliminarSerie();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jEliminarSerieActionPerformed
+
+    private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSalirActionPerformed
+
+    private void jEliminarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarPeliculaActionPerformed
+        GUIEliminarPelicula ventana = new GUIEliminarPelicula();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jEliminarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,17 +245,22 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jAdicionarSerie;
     private javax.swing.JMenuItem jBuscarPelicula;
     private javax.swing.JMenuItem jBuscarSerie;
-    private javax.swing.JMenuItem jDeveloper;
     private javax.swing.JMenuItem jEliminarPelicula;
     private javax.swing.JMenuItem jEliminarSerie;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jListarPelicula;
     private javax.swing.JMenuItem jListarSerie;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemAcercaDe;
+    private javax.swing.JMenuItem jMenuItemCalculoPeli;
+    private javax.swing.JMenuItem jMenuItemCalculoSerie;
+    private javax.swing.JMenuItem jMenuItemSalir;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,16 +4,19 @@
  */
 package Interfaz;
 
+import Model.Contenido;
 import Model.Serie;
-import Servicio.ServicioSerie;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import servicios.ServicioContenido;
 
 /**
  *
  * @author jamed
  */
 public class GUIListarSerie extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarSerie.class.getName());
 
     /**
@@ -22,7 +25,7 @@ public class GUIListarSerie extends javax.swing.JFrame {
     public GUIListarSerie() {
         initComponents();
         this.setResizable(false);
-        this.pack(); 
+        this.pack();
         this.setLocationRelativeTo(null);
     }
 
@@ -70,16 +73,16 @@ public class GUIListarSerie extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(215, 215, 215)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(225, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnListarSerie)
-                        .addGap(249, 249, 249))))
+                        .addGap(249, 249, 249))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,26 +101,32 @@ public class GUIListarSerie extends javax.swing.JFrame {
 
     private void btnListarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarSerieActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tablaSeries.getModel();
-    modelo.setRowCount(0); // 1. Limpia las filas previas
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        modelo.setRowCount(0); // 1. Limpia las filas previas
 
-    // 2. Define las columnas de la tabla alineadas al diagrama
-    modelo.setColumnIdentifiers(new String[]{
-        "ID", "Título", "Duración Cap.", "Calificación", "Retención", "Temporadas", "Episodios Totales"
-    });
+        // 2. Define las columnas de la tabla alineadas al diagrama
+        modelo.setColumnIdentifiers(new String[]{
+            "ID", "Título", "Duración", "Calificación", "Estreno", "Temporadas", "No. Episodios"
+        });
 
-    // 3. Recorre las series almacenadas en ServicioSerie
-    for (Serie s : ServicioSerie.listar()) {
-        Object[] fila = new Object[]{
-            s.getId(),
-            s.getTitulo(),
-            s.getDuracionMinutos() + " min",
-            s.getCalificacion() + " ★",
-            String.format("%.2f pts", s.calcularRetencion()),
-            s.getTemporadas(),
-            s.getEpisodios()
-        };
-        modelo.addRow(fila); // Agrega cada fila a la tabla
-    }
+        // 3. Recorre las series almacenadas
+        Map <String, Contenido> series;
+        series = ServicioContenido.getSeries();
+        for (Map.Entry<String, Contenido> c : series.entrySet()) {
+            String id = c.getKey();
+            Serie s = (Serie) c.getValue();
+            
+            Object[] fila = new Object[]{
+                s.getId(),
+                s.getTitulo(),
+                s.getDuracionMinutos() + " min",
+                s.getCalificacion() + " ★",
+                s.getFechaEstreno().format(formatter),
+                s.getTemporadas(),
+                s.getEpisodios()
+            };
+            modelo.addRow(fila); // Agrega cada fila a la tabla
+        }
     }//GEN-LAST:event_btnListarSerieActionPerformed
 
     /**

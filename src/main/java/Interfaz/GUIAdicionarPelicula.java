@@ -5,18 +5,21 @@
 package Interfaz;
 
 import Model.Pelicula;
-import Servicio.ServicioPelicula;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import servicios.ServicioContenido;
 
 /**
  *
  * @author jamed
  */
 public class GUIAdicionarPelicula extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIAdicionarPelicula.class.getName());
 
     /**
@@ -25,18 +28,18 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
     public GUIAdicionarPelicula() {
         initComponents();
         this.setResizable(false);
-        this.pack(); 
+        this.pack();
         this.setLocationRelativeTo(null);
     }
-    
+
     private void limpiarCampos() {
-    txtID1.setText("");
-    txtTitulo.setText("");
-    txtDuracion.setText("");
-    txtCalificacion.setText("");
-    txtFechaEstreno.setText("");
-  
-}
+        txtID1.setText("");
+        txtTitulo.setText("");
+        txtDuracion.setText("");
+        txtCalificacion.setText("");
+        txtFechaEstreno.setText("");
+        txtRecaudacion.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,64 +110,54 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(176, 176, 176))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(cmbEsSaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRecaudacion))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel9))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtID1)
-                                    .addComponent(txtTitulo)
-                                    .addComponent(txtDuracion)
-                                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(40, 40, 40)
-                        .addComponent(btnGuardar)
-                        .addGap(61, 61, 61))))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel10))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbEsSaga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRecaudacion, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(36, 36, 36))
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.CENTER))
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel8)
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar))
+                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -177,7 +170,9 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtRecaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,73 +184,73 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-        // 1. Capturar datos de los campos de texto base
-        String id = txtID1.getText().trim();
-        String titulo = txtTitulo.getText().trim();
-        String duracionStr = txtDuracion.getText().trim();
-        String calificacionStr = txtCalificacion.getText().trim();
-        String fechaStr = txtFechaEstreno.getText().trim(); // Formato esperado: dd/MM/yyyy
-        
-        // 2. Capturar y parsear los nuevos atributos exclusivos
-        String taquillaStr = txtRecaudacion.getText().trim();
-        
-        // JComboBox para esSaga ("Sí" / "No")
-        String sagaSeleccion = cmbEsSaga.getSelectedItem().toString();
-        boolean esSaga = sagaSeleccion.equalsIgnoreCase("Sí");
+            // 1. Capturar datos de los campos de texto base
+            String id = txtID1.getText().trim();
+            String titulo = txtTitulo.getText().trim();
+            String duracionStr = txtDuracion.getText().trim();
+            String calificacionStr = txtCalificacion.getText().trim();
+            String fechaStr = txtFechaEstreno.getText().trim(); // Formato esperado: dd/MM/yyyy
 
-        // 3. Validar que ningún campo esté vacío
-        if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty() || 
-            calificacionStr.isEmpty() || fechaStr.isEmpty() || taquillaStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            // 2. Capturar y parsear los nuevos atributos exclusivos
+            String taquillaStr = txtRecaudacion.getText().trim();
+
+            // JComboBox para esSaga ("Sí" / "No")
+            String sagaSeleccion = cmbEsSaga.getSelectedItem().toString();
+            boolean esSaga = sagaSeleccion.equalsIgnoreCase("Sí");
+
+            // 3. Validar que ningún campo esté vacío
+            if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty()
+                    || calificacionStr.isEmpty() || fechaStr.isEmpty() || taquillaStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 4. Parsear tipos de datos numéricos
+            int duracion = Integer.parseInt(duracionStr);
+            double calificacion = Double.parseDouble(calificacionStr);
+
+            if (calificacion < 0.0 || calificacion > 10.0) {
+                JOptionPane.showMessageDialog(this,
+                        "La calificación debe ser un valor entre 0.0 y 10.0",
+                        "Calificación Inválida",
+                        JOptionPane.WARNING_MESSAGE);
+                return; // Cancela el guardado para que corrija la nota
+            }
+
+            double recaudacionTaquilla = Double.parseDouble(taquillaStr);
+
+            // 5. Parsear fecha
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechaEstreno = LocalDate.parse(fechaStr, formatter);
+
+            // 6. Instanciar la Película con el nuevo constructor
+            Pelicula nuevaPelicula = new Pelicula(
+                    id,
+                    titulo,
+                    duracion,
+                    calificacion,
+                    fechaEstreno,
+                    esSaga,
+                    recaudacionTaquilla
+            );
+
+            // 7. Enviar al Servicio/Controlador
+            boolean exito = ServicioContenido.addContenido(nuevaPelicula);
+
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Película guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ya existe una película o serie registrada con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La duración, calificación y taquilla deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "La fecha debe tener el formato dd/MM/yyyy.", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error insospechado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // 4. Parsear tipos de datos numéricos
-        int duracion = Integer.parseInt(duracionStr);
-        double calificacion = Double.parseDouble(calificacionStr);
-        
-        if (calificacion < 0.0 || calificacion > 10.0) {
-    JOptionPane.showMessageDialog(this, 
-        "La calificación debe ser un valor entre 0.0 y 10.0", 
-        "Calificación Inválida", 
-        JOptionPane.WARNING_MESSAGE);
-    return; // Cancela el guardado para que corrija la nota
-}
-        
-        double recaudacionTaquilla = Double.parseDouble(taquillaStr);
-
-        // 5. Parsear fecha
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaEstreno = sdf.parse(fechaStr);
-
-        // 6. Instanciar la Película con el nuevo constructor
-        Pelicula nuevaPelicula = new Pelicula(
-            id, 
-            titulo, 
-            duracion, 
-            calificacion, 
-            fechaEstreno, 
-            esSaga, 
-            recaudacionTaquilla
-        );
-
-        // 7. Enviar al Servicio/Controlador
-        boolean exito = ServicioPelicula.adicionar(nuevaPelicula);
-
-        if (exito) {
-            JOptionPane.showMessageDialog(this, "Película guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Ya existe una película registrada con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "La duración, calificación y taquilla deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-    } catch (ParseException e) {
-        JOptionPane.showMessageDialog(this, "La fecha debe tener el formato dd/MM/yyyy.", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error insospechado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

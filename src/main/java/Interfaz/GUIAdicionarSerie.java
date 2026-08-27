@@ -6,15 +6,19 @@ package Interfaz;
 
 import Model.Serie;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import servicios.ServicioContenido;
 
 /**
  *
  * @author jamed
  */
 public class GUIAdicionarSerie extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIAdicionarSerie.class.getName());
 
     /**
@@ -23,19 +27,23 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
     public GUIAdicionarSerie() {
         initComponents();
         this.setResizable(false);
-        this.pack(); 
+        this.pack();
         this.setLocationRelativeTo(null);
     }
-    
+
     private void limpiarCampos() {
-    txtID.setText("");
-    txtTitulo.setText("");
-    txtDuracion.setText("");
-    txtCalificacion.setText("");
-    txtFechaEstreno.setText("");
-    if (txtTemporadas != null) txtTemporadas.setText("");
-    if (txtEpisodiosPorTemporada != null) txtEpisodiosPorTemporada.setText("");
-}
+        txtID.setText("");
+        txtTitulo.setText("");
+        txtDuracion.setText("");
+        txtCalificacion.setText("");
+        txtFechaEstreno.setText("");
+        if (txtTemporadas != null) {
+            txtTemporadas.setText("");
+        }
+        if (txtEpisodiosPorTemporada != null) {
+            txtEpisodiosPorTemporada.setText("");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,7 +84,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         jLabel1.setText("Título:");
 
         jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel3.setText("Duración Promedio:");
+        jLabel3.setText("Duración:");
 
         txtDuracion.addActionListener(this::txtDuracionActionPerformed);
 
@@ -105,59 +113,62 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtTemporadas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEpisodiosPorTemporada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addGap(71, 71, 71))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(217, 217, 217))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(35, 35, 35)
+                        .addComponent(txtTemporadas, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(90, 90, 90)
+                        .addComponent(txtID))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEpisodiosPorTemporada))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(72, 72, 72)
+                        .addComponent(txtTitulo))
+                    .addComponent(btnGuardar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(54, 54, 54)
+                        .addComponent(txtDuracion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(42, 42, 42)
+                        .addComponent(txtCalificacion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(25, 25, 25)
+                        .addComponent(txtFechaEstreno)))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addComponent(jLabel8)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addGap(37, 37, 37)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,7 +180,9 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtEpisodiosPorTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,53 +198,55 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-        // 1. Extraer Strings directos
-        String id = txtID.getText().trim();
-        String titulo = txtTitulo.getText().trim();
+            // 1. Extraer Strings directos
+            String id = txtID.getText().trim();
+            String titulo = txtTitulo.getText().trim();
 
-        // Validar que los campos de texto no estén vacíos
-        if (id.isEmpty() || titulo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos de texto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            // Validar que los campos de texto no estén vacíos
+            if (id.isEmpty() || titulo.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos de texto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 2. Parsear Numéricos
+            int duracionMinutos = Integer.parseInt(txtDuracion.getText().trim());
+            double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
+
+            if (calificacion < 0.0 || calificacion > 10.0) {
+                JOptionPane.showMessageDialog(this,
+                        "La calificación debe estar entre 0.0 y 10.0",
+                        "Calificación Inválida",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            int temporadas = Integer.parseInt(txtTemporadas.getText().trim());
+            int episodiosPorTemporada = Integer.parseInt(txtEpisodiosPorTemporada.getText().trim());
+
+            // 3. Parsear Fecha (dd/MM/yyyy)
+            // 3. Parsear Fecha (dd/MM/yyyy)
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechaEstreno = LocalDate.parse(txtFechaEstreno.getText().trim(), formatter);
+
+            // 4. Instanciar el objeto Serie
+            Serie nuevaSerie = new Serie(id, titulo, duracionMinutos, calificacion, fechaEstreno, temporadas, episodiosPorTemporada);
+
+            // 5. Enviar al Servicio/Controlador
+            boolean exito = ServicioContenido.addContenido(nuevaSerie);
+
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Serie guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ya existe una película o serie registrada con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en los datos numéricos (Duración, Calificación, Temporadas o Episodios). Verifique que ingresó números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Error en la Fecha de Estreno. Use el formato exacto: dd/MM/yyyy", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // 2. Parsear Numéricos
-        int duracionMinutos = Integer.parseInt(txtDuracion.getText().trim());
-        double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
-        
-        if (calificacion < 0.0 || calificacion > 10.0) {
-    JOptionPane.showMessageDialog(this, 
-        "La calificación debe estar entre 0.0 y 10.0", 
-        "Calificación Inválida", 
-        JOptionPane.WARNING_MESSAGE);
-    return;
-}
-        
-        int temporadas = Integer.parseInt(txtTemporadas.getText().trim());
-        int episodiosPorTemporada = Integer.parseInt(txtEpisodiosPorTemporada.getText().trim());
-
-        // 3. Parsear Fecha (dd/MM/yyyy)
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
-        Date fechaEstreno = sdf.parse(txtFechaEstreno.getText().trim());
-
-        // 4. Instanciar el objeto Serie
-        Serie nuevaSerie = new Serie(id, titulo, duracionMinutos, calificacion, fechaEstreno, temporadas, episodiosPorTemporada);
-        Servicio.ServicioSerie.adicionar(nuevaSerie);
-
-        // TODO: En el siguiente paso pasaremos 'nuevaSerie' al Servicio/Map
-        JOptionPane.showMessageDialog(this, "¡Serie creada con éxito!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Limpiar campos o cerrar ventana
-        limpiarCampos();
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error en los datos numéricos (Duración, Calificación, Temporadas o Episodios). Verifique que ingresó números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-    } catch (java.text.ParseException e) {
-        JOptionPane.showMessageDialog(this, "Error en la Fecha de Estreno. Use el formato exacto: dd/MM/yyyy", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

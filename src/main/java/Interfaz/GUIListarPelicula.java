@@ -4,10 +4,13 @@
  */
 package Interfaz;
 
+import Model.Contenido;
 import Model.Pelicula;
-import Servicio.ServicioPelicula;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import servicios.ServicioContenido;
 
 /**
  *
@@ -69,29 +72,23 @@ public class GUIListarPelicula extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(182, 182, 182))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnListarPelicula)
-                        .addGap(246, 246, 246))))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addComponent(btnListarPelicula)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnListarPelicula)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,21 +96,26 @@ public class GUIListarPelicula extends javax.swing.JFrame {
 
     private void btnListarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPeliculaActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tablaPeliculas.getModel();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         modelo.setRowCount(0); // 1. Limpia la tabla para evitar duplicados
 
         // 2. Definir las cabeceras/columnas de la tabla para que coincidan con los datos
         modelo.setColumnIdentifiers(new String[]{
-            "ID", "Título", "Duración", "Calificación", "Retención", "Es Saga", "Taquilla", "Alquiler"
+            "ID", "Título", "Duración", "Calificación", "Estreno", "Es Saga", "Taquilla", "Alquiler"
         });
 
-        // 3. Recorrer la lista devuelta por ServicioPelicula
-        for (Pelicula p : ServicioPelicula.listar()) {
+        // 3. Recorrer la lista
+        Map <String, Contenido> peliculas;
+        peliculas = ServicioContenido.getPeliculas();
+        for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
+            Pelicula p = (Pelicula) c.getValue();
+            
             Object[] fila = new Object[]{
                 p.getId(),
                 p.getTitulo(),
                 p.getDuracionMinutos() + " min",
                 p.getCalificacion() + " ★",
-                String.format("%.2f pts", p.calcularRetencion()),
+                p.getFechaEstreno().format(formatter),
                 p.isEsSaga() ? "Sí" : "No",
                 "$" + String.format("%.2f", p.getRecaudacionTaquilla()),
                 "$" + String.format("%.2f", p.calcularAlquiler())

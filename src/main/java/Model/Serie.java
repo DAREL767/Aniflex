@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Serie extends Contenido {
     private int episodios;
     private List<Episodio> listaEpisodios;
 
-    public Serie(String id, String titulo, int duracionMinutos, double calificacion, Date fechaEstreno, int temporadas, int episodios) {
+    public Serie(String id, String titulo, int duracionMinutos, double calificacion, LocalDate fechaEstreno, int temporadas, int episodios) {
         super(id, titulo, duracionMinutos, calificacion, fechaEstreno);
         this.temporadas = temporadas;
         this.episodios = episodios;
@@ -26,8 +27,8 @@ public class Serie extends Contenido {
     @Override
     public double calcularRetencion() {
         // En series, las horas acumuladas por sus episodios ponderan la calificación
-        double horasTotales = (getDuracionMinutos() * episodios) / 60.0;
-    return getCalificacion() * (1 + (horasTotales * 0.05));
+        double horasTotales = (getDuracionMinutos() / episodios) / 60.0;
+        return getCalificacion() * (1 + (horasTotales * 0.05));
     }
 
     @Override
