@@ -4,7 +4,7 @@
 
 package com.mycompany.aniflex;
 
-import Interfaz.GUIPrincipal;
+import interfaz.GUIPrincipal;
 
 /**
  *
