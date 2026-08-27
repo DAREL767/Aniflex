@@ -68,7 +68,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inicio");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dan\\Documents\\NetBeansProjects\\Aniflex\\src\\main\\resources\\aniflex-logo(1)(1).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aniflex-logo(1)(1).png"))); // NOI18N
 
         jMenu1.setText("Archivo");
 
