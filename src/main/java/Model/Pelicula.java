@@ -8,9 +8,14 @@
  */
 package Model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
-import java.util.Date;
 
+@Getter
+@Setter
+@SuperBuilder
 public class Pelicula extends Contenido implements IAlquilable {
 
     private boolean esSaga;
@@ -22,7 +27,6 @@ public class Pelicula extends Contenido implements IAlquilable {
         this.recaudacionTaquilla = recaudacionTaquilla;
     }
 
-    // --- ESTE MÉTODO ES EL QUE CONTRARRESTA EL ERROR DE LA INTERFAZ ---
     @Override
     public double calcularAlquiler() {
         return esSaga ? 5000.0 : 3500.0;
@@ -40,25 +44,9 @@ public class Pelicula extends Contenido implements IAlquilable {
                 + " | Alquiler: $" + String.format("%.2f", calcularAlquiler());
     }
 
+    @Override
     public double calcularRetencion() {
         double horas = getDuracionMinutos() / 60.0;
         return getCalificacion() * (1 + (horas * 0.1));
-    }
-
-    // Getters y Setters
-    public boolean isEsSaga() {
-        return esSaga;
-    }
-
-    public void setEsSaga(boolean esSaga) {
-        this.esSaga = esSaga;
-    }
-
-    public double getRecaudacionTaquilla() {
-        return recaudacionTaquilla;
-    }
-
-    public void setRecaudacionTaquilla(double recaudacionTaquilla) {
-        this.recaudacionTaquilla = recaudacionTaquilla;
     }
 }

@@ -3,19 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author jamed
- */
+@Getter
+@Setter
+@SuperBuilder
 public class Serie extends Contenido {
     private int temporadas;
     private int episodios;
-    private List<Episodio> listaEpisodios;
+    
+    @lombok.Builder.Default
+    private List<Episodio> listaEpisodios = new ArrayList<>();
 
     public Serie(String id, String titulo, int duracionMinutos, double calificacion, LocalDate fechaEstreno, int temporadas, int episodios) {
         super(id, titulo, duracionMinutos, calificacion, fechaEstreno);
@@ -26,8 +30,8 @@ public class Serie extends Contenido {
 
     @Override
     public double calcularRetencion() {
-        // En series, las horas acumuladas por sus episodios ponderan la calificación
-        double horasTotales = (getDuracionMinutos() / episodios) / 60.0;
+        if (episodios == 0) return 0.0;
+        double horasTotales = (getDuracionMinutos() / (double) episodios) / 60.0;
         return getCalificacion() * (1 + (horasTotales * 0.05));
     }
 
@@ -41,16 +45,10 @@ public class Serie extends Contenido {
                " | Retención: " + String.format("%.2f", calcularRetencion()) + " pts";
     }
 
-    // Getters y Setters
-    public int getTemporadas() { return temporadas; }
-    public void setTemporadas(int temporadas) { this.temporadas = temporadas; }
-
-    public int getEpisodios() { return episodios; }
-    public void setEpisodios(int episodios) { this.episodios = episodios; }
-
-    public List<Episodio> getListaEpisodios() { return listaEpisodios; }
-    
     public void agregarEpisodio(Episodio ep) {
+        if (this.listaEpisodios == null) {
+            this.listaEpisodios = new ArrayList<>();
+        }
         this.listaEpisodios.add(ep);
     }
 }

@@ -4,33 +4,18 @@
  */
 package Model;
 
-/**
- *
- * @author jamed
- */
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Episodio {
     private int noEpisodio;
     private String titulo;
-
-    public Episodio(int noEpisodio, String titulo) {
-        this.noEpisodio = noEpisodio;
-        this.titulo = titulo;
-    }
-
-    // Getters y Setters
-    public int getNoEpisodio() {
-        return noEpisodio;
-    }
-
-    public void setNoEpisodio(int noEpisodio) {
-        this.noEpisodio = noEpisodio;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
 }
