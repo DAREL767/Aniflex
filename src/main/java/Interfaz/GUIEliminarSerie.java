@@ -24,6 +24,10 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+    
+    private void limpiarCampos() {
+        txtID.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,8 +40,12 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
-        jButtonBorrar = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
+        btnBorrarSerie = new javax.swing.JButton();
+        btnBuscarSerie = new javax.swing.JButton();
+        lblResultadoTitulo = new javax.swing.JLabel();
+        lblResultadoDuracion = new javax.swing.JLabel();
+        lblResultadoCalificacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminación");
@@ -48,62 +56,123 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel7.setText("Ingrese la ID de la serie a eliminar");
 
-        jTextFieldID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.addActionListener(this::jButtonBorrarActionPerformed);
+        btnBorrarSerie.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnBorrarSerie.setText("Borrar");
+        btnBorrarSerie.addActionListener(this::btnBorrarSerieActionPerformed);
+
+        btnBuscarSerie.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnBuscarSerie.setText("Buscar");
+        btnBuscarSerie.addActionListener(this::btnBuscarSerieActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButtonBorrar)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel1))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnBuscarSerie)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBorrarSerie))
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblResultadoTitulo)
+                            .addComponent(lblResultadoDuracion)
+                            .addComponent(lblResultadoCalificacion))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonBorrar)
-                .addGap(19, 19, 19))
+                .addComponent(lblResultadoTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoDuracion)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoCalificacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBorrarSerie)
+                    .addComponent(btnBuscarSerie))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        String id = jTextFieldID.getText();
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                Serie s = ServicioContenido.getInstance().searchSerie(id);
-                int respuesta = JOptionPane.showConfirmDialog(this, 
-                        ("¿Está seguro de que desea borrar la siguiente serie? \n" + s.getDetalles()), 
-                        "Confirmar", 
-                        JOptionPane.YES_NO_OPTION);
-                
-                if (respuesta == JOptionPane.YES_OPTION){
-                    ServicioContenido.getInstance().delSerie(id);
-                    JOptionPane.showMessageDialog(this, "Serie eliminada correctamente");
-                }
-            } catch (IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+    private void btnBorrarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSerieActionPerformed
+        String id = txtID.getText().trim();
+
+    int confirmacion = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de que desea eliminar esta serie?",
+            "Confirmar Eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        try {
+            ServicioContenido.getInstance().delSerie(id);
+            
+            // Limpieza tras eliminar
+            txtID.setText("");
+            limpiarLabels();
+            btnBorrarSerie.setEnabled(false);
+
+            JOptionPane.showMessageDialog(this, "Película eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
+    }
+    }//GEN-LAST:event_btnBorrarSerieActionPerformed
+
+    private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
+        String id = txtID.getText().trim();
+
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        btnBorrarSerie.setEnabled(false);
+        Serie s = ServicioContenido.getInstance().searchSerie(id);
+
+        // Actualizamos los Labels
+        lblResultadoTitulo.setText("Título: " + s.getTitulo());
+        lblResultadoDuracion.setText("Duración: " + s.getDuracionMinutos() + " min");
+        lblResultadoCalificacion.setText("Calificación: " + s.getCalificacion() + " ★");
+
+        btnBorrarSerie.setEnabled(true);
+
+    } catch (IllegalArgumentException e) {
+        limpiarLabels();
+        btnBorrarSerie.setEnabled(false);
+        JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+    }
+    private void limpiarLabels() {
+    lblResultadoTitulo.setText("Título: -");
+    lblResultadoDuracion.setText("Duración: -");
+    lblResultadoCalificacion.setText("Calificación: -");
+    }//GEN-LAST:event_btnBuscarSerieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +200,13 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton btnBorrarSerie;
+    private javax.swing.JButton btnBuscarSerie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JLabel lblResultadoCalificacion;
+    private javax.swing.JLabel lblResultadoDuracion;
+    private javax.swing.JLabel lblResultadoTitulo;
+    private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,12 +42,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jAdicionarPelicula = new javax.swing.JMenuItem();
         jListarPelicula = new javax.swing.JMenuItem();
         jBuscarPelicula = new javax.swing.JMenuItem();
+        jActualizarPelicula = new javax.swing.JMenuItem();
         jEliminarPelicula = new javax.swing.JMenuItem();
         jMenuItemCalculoPeli = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jAdicionarSerie = new javax.swing.JMenuItem();
         jListarSerie = new javax.swing.JMenuItem();
         jBuscarSerie = new javax.swing.JMenuItem();
+        jActualizarSerie = new javax.swing.JMenuItem();
         jEliminarSerie = new javax.swing.JMenuItem();
         jMenuItemCalculoSerie = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
@@ -86,6 +88,10 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jBuscarPelicula.addActionListener(this::jBuscarPeliculaActionPerformed);
         jMenu2.add(jBuscarPelicula);
 
+        jActualizarPelicula.setText("Actualizar");
+        jActualizarPelicula.addActionListener(this::jActualizarPeliculaActionPerformed);
+        jMenu2.add(jActualizarPelicula);
+
         jEliminarPelicula.setText("Eliminar");
         jEliminarPelicula.addActionListener(this::jEliminarPeliculaActionPerformed);
         jMenu2.add(jEliminarPelicula);
@@ -109,6 +115,10 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jBuscarSerie.setText("Buscar");
         jBuscarSerie.addActionListener(this::jBuscarSerieActionPerformed);
         jMenu3.add(jBuscarSerie);
+
+        jActualizarSerie.setText("Actualizar");
+        jActualizarSerie.addActionListener(this::jActualizarSerieActionPerformed);
+        jMenu3.add(jActualizarSerie);
 
         jEliminarSerie.setText("Eliminar");
         jEliminarSerie.addActionListener(this::jEliminarSerieActionPerformed);
@@ -209,6 +219,16 @@ public class GUIPrincipal extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_jEliminarPeliculaActionPerformed
 
+    private void jActualizarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarPeliculaActionPerformed
+        GUIActualizarPelicula ventana = new GUIActualizarPelicula ();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jActualizarPeliculaActionPerformed
+
+    private void jActualizarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarSerieActionPerformed
+        GUIActualizarSerie ventana = new GUIActualizarSerie ();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jActualizarSerieActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,6 +255,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem jActualizarPelicula;
+    private javax.swing.JMenuItem jActualizarSerie;
     private javax.swing.JMenuItem jAdicionarPelicula;
     private javax.swing.JMenuItem jAdicionarSerie;
     private javax.swing.JMenuItem jBuscarPelicula;

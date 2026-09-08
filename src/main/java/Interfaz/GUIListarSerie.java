@@ -8,6 +8,7 @@ import Model.Contenido;
 import Model.Serie;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import servicios.IObservador;
 import javax.swing.table.DefaultTableModel;
 import servicios.ServicioContenido;
 
@@ -15,7 +16,7 @@ import servicios.ServicioContenido;
  *
  * @author jamed
  */
-public class GUIListarSerie extends javax.swing.JFrame {
+public class GUIListarSerie extends javax.swing.JFrame implements IObservador {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarSerie.class.getName());
 
@@ -27,7 +28,41 @@ public class GUIListarSerie extends javax.swing.JFrame {
         this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
+        
+        ServicioContenido.getInstance().registrarObservador(this);
+        cargarTablaSeries();
     }
+    
+    public void cargarTablaSeries() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaSeries.getModel();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        modelo.setRowCount(0);
+
+        modelo.setColumnIdentifiers(new String[]{
+        "ID", "Título", "Duración", "Calificación", "Estreno", "Temporadas", "No. Episodios"
+        });
+
+        Map<String, Contenido> series = ServicioContenido.getInstance().getSeries();
+        if (series != null) {
+            for (Map.Entry<String, Contenido> c : series.entrySet()) {
+                if (c.getValue() instanceof Serie) {
+                Serie s = (Serie) c.getValue();
+                Object[] fila = new Object[]{
+                s.getId(),
+                s.getTitulo(),
+                s.getDuracionMinutos() + " min",
+                s.getCalificacion() + " ★",
+                s.getFechaEstreno().format(formatter),
+                s.getTemporadas(),
+                s.getEpisodios()
+                };
+                modelo.addRow(fila);
+            }
+        }
+    }
+}
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,33 +135,7 @@ public class GUIListarSerie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarSerieActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tablaSeries.getModel();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        modelo.setRowCount(0); // 1. Limpia las filas previas
-
-        // 2. Define las columnas de la tabla alineadas al diagrama
-        modelo.setColumnIdentifiers(new String[]{
-            "ID", "Título", "Duración", "Calificación", "Estreno", "Temporadas", "No. Episodios"
-        });
-
-        // 3. Recorre las series almacenadas
-        Map <String, Contenido> series;
-        series = ServicioContenido.getInstance().getSeries();
-        for (Map.Entry<String, Contenido> c : series.entrySet()) {
-            String id = c.getKey();
-            Serie s = (Serie) c.getValue();
-            
-            Object[] fila = new Object[]{
-                s.getId(),
-                s.getTitulo(),
-                s.getDuracionMinutos() + " min",
-                s.getCalificacion() + " ★",
-                s.getFechaEstreno().format(formatter),
-                s.getTemporadas(),
-                s.getEpisodios()
-            };
-            modelo.addRow(fila); // Agrega cada fila a la tabla
-        }
+        cargarTablaSeries();
     }//GEN-LAST:event_btnListarSerieActionPerformed
 
     /**
@@ -160,4 +169,10 @@ public class GUIListarSerie extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaSeries;
     // End of variables declaration//GEN-END:variables
+
+
+    @Override
+    public void notificarCambio() {
+        cargarTablaSeries();
+    }
 }

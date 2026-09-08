@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Model.Pelicula;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import servicios.ServicioContenido;
 
@@ -12,20 +13,20 @@ import servicios.ServicioContenido;
  *
  * @author jamed
  */
-public class GUIAdicionarPelicula extends javax.swing.JFrame {
-
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIAdicionarPelicula.class.getName());
+public class GUIActualizarPelicula extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIActualizarPelicula.class.getName());
 
     /**
-     * Creates new form GUIAdicionarPelicula
+     * Creates new form GUIActualizarPelicula
      */
-    public GUIAdicionarPelicula() {
+    public GUIActualizarPelicula() {
         initComponents();
         this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
     }
-
+    
     private void limpiarCampos() {
         txtID1.setText("");
         txtTitulo.setText("");
@@ -44,59 +45,64 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtRecaudacion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        cmbEsSaga = new javax.swing.JComboBox<>();
         txtTitulo = new javax.swing.JTextField();
         txtID1 = new javax.swing.JTextField();
         txtDuracion = new javax.swing.JTextField();
         txtCalificacion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnActualizarPelicula = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtRecaudacion = new javax.swing.JTextField();
-        cmbEsSaga = new javax.swing.JComboBox<>();
+        btnBuscarPelicula = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Adicionar Pelicula");
-
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel1.setText("Título:");
-
-        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel2.setText("ID:");
-
-        jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel3.setText("Duración:");
+        setTitle("Actualizar Pelicula");
 
         jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel4.setText("Calificación:");
 
+        txtRecaudacion.setToolTipText("0 si salio exclusivamente para plataformas");
+
         jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Estreno:");
+
+        cmbEsSaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sí", "No" }));
 
         txtDuracion.addActionListener(this::txtDuracionActionPerformed);
 
         jLabel8.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
-        jLabel8.setText("REGISTRAR PELÍCULA");
+        jLabel8.setText("Actualizar Película");
 
-        btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
+        jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel1.setText("Título:");
+
+        btnActualizarPelicula.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnActualizarPelicula.setText("Actualizar");
+        btnActualizarPelicula.addActionListener(this::btnActualizarPeliculaActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel2.setText("ID:");
 
         jLabel9.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel9.setText("Saga: ");
 
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel3.setText("Duración:");
+
         jLabel10.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel10.setText("Recaudación Taquilla: ");
 
-        txtRecaudacion.setToolTipText("0 si salio exclusivamente para plataformas");
-
-        cmbEsSaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sí", "No" }));
+        btnBuscarPelicula.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnBuscarPelicula.setText("Buscar");
+        btnBuscarPelicula.addActionListener(this::btnBuscarPeliculaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,26 +122,28 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                             .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRecaudacion, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(txtRecaudacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCalificacion))
                         .addGap(36, 36, 36))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbEsSaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(btnGuardar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(96, 96, 96))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBuscarPelicula)
+                        .addGap(56, 56, 56)
+                        .addComponent(btnActualizarPelicula)
+                        .addGap(87, 87, 87))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,13 +164,14 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -171,9 +180,11 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtRecaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnActualizarPelicula)
+                    .addComponent(btnBuscarPelicula))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,57 +194,105 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDuracionActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnActualizarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarPeliculaActionPerformed
         try {
+            // 1. Capturar datos base
             String id = txtID1.getText().trim();
             String titulo = txtTitulo.getText().trim();
+            String duracionStr = txtDuracion.getText().trim();
+            String calificacionStr = txtCalificacion.getText().trim();
+            String taquillaStr = txtRecaudacion.getText().trim();
+
+            // JComboBox para esSaga
+            String sagaSeleccion = cmbEsSaga.getSelectedItem().toString();
+            boolean esSaga = sagaSeleccion.equalsIgnoreCase("Sí");
+
+            // Capturar Fecha del JDateChooser
             java.util.Date fechaSeleccionada = jDateChooser1.getDate();
 
-            if (id.isEmpty() || titulo.isEmpty() || fechaSeleccionada == null) {
+            // 2. Validaciones
+            if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty()
+                    || calificacionStr.isEmpty() || taquillaStr.isEmpty() || fechaSeleccionada == null) {
                 JOptionPane.showMessageDialog(this, "Por favor complete todos los campos, incluida la fecha de estreno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
+            // Convertir java.util.Date a java.time.LocalDate
             java.time.LocalDate fechaEstreno = fechaSeleccionada.toInstant()
                     .atZone(java.time.ZoneId.systemDefault())
                     .toLocalDate();
 
-            int duracion = Integer.parseInt(txtDuracion.getText().trim());
-            double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
+            // Parsear datos numéricos
+            int duracion = Integer.parseInt(duracionStr);
+            double calificacion = Double.parseDouble(calificacionStr);
 
             if (calificacion < 0.0 || calificacion > 10.0) {
-                JOptionPane.showMessageDialog(this, "La calificación debe estar entre 0.0 y 10.0", "Calificación Inválida", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "La calificación debe ser un valor entre 0.0 y 10.0",
+                        "Calificación Inválida",
+                        JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            boolean esSaga = cmbEsSaga.getSelectedItem().toString().equalsIgnoreCase("Sí");
-            double recaudacion = Double.parseDouble(txtRecaudacion.getText().trim());
+            double recaudacionTaquilla = Double.parseDouble(taquillaStr);
 
-            Pelicula nuevaPelicula = Pelicula.builder()
+            // 3. Construir el objeto actualizado usando Builder
+            Pelicula peliculaActualizada = Pelicula.builder()
                     .id(id)
                     .titulo(titulo)
                     .duracionMinutos(duracion)
                     .calificacion(calificacion)
                     .fechaEstreno(fechaEstreno)
                     .esSaga(esSaga)
-                    .recaudacionTaquilla(recaudacion)
+                    .recaudacionTaquilla(recaudacionTaquilla)
                     .build();
 
-            boolean exito = ServicioContenido.getInstance().addContenido(nuevaPelicula);
+            ServicioContenido.getInstance().updateContenido(peliculaActualizada);
 
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Película guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                limpiarCampos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Ya existe un contenido registrado con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Película actualizada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+            txtID1.setEditable(true);
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error en los datos numéricos. Verifique los valores ingresados.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La duración, calificación y taquilla deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnActualizarPeliculaActionPerformed
+
+    private void btnBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPeliculaActionPerformed
+        String id = txtID1.getText().trim();
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la película a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Pelicula p = ServicioContenido.getInstance().searchPelicula(id);
+
+        if (p != null) {
+            // Llenar campos con la información encontrada
+            txtTitulo.setText(p.getTitulo());
+            txtDuracion.setText(String.valueOf(p.getDuracionMinutos()));
+            txtCalificacion.setText(String.valueOf(p.getCalificacion()));
+            cmbEsSaga.setSelectedItem(p.isEsSaga() ? "Sí" : "No");
+            txtRecaudacion.setText(String.valueOf(p.getRecaudacionTaquilla()));
+
+            if (p.getFechaEstreno() != null) {
+                java.util.Date fechaDate = java.util.Date.from(
+                    p.getFechaEstreno().atStartOfDay(java.time.ZoneId.systemDefault()).toInstant()
+                );
+                jDateChooser1.setDate(fechaDate);
+            } else {
+                jDateChooser1.setDate(null);
+            }
+
+            txtID1.setEditable(false);
+            JOptionPane.showMessageDialog(this, "Película encontrada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró ninguna película con el ID proporcionado.", "Sin Resultados", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,11 +316,12 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GUIAdicionarPelicula().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GUIActualizarPelicula().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnActualizarPelicula;
+    private javax.swing.JButton btnBuscarPelicula;
     private javax.swing.JComboBox<String> cmbEsSaga;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;

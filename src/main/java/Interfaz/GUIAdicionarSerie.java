@@ -37,7 +37,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         txtTitulo.setText("");
         txtDuracion.setText("");
         txtCalificacion.setText("");
-        txtFechaEstreno.setText("");
+        jDateChooser1.setDate(null);
         if (txtTemporadas != null) {
             txtTemporadas.setText("");
         }
@@ -65,12 +65,12 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtCalificacion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtFechaEstreno = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtTemporadas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtEpisodiosPorTemporada = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar Serie");
@@ -95,8 +95,6 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Estreno:");
 
-        txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
-
         jLabel6.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel6.setText("Temporadas:");
 
@@ -115,45 +113,40 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtID)
+                    .addComponent(txtTitulo)
+                    .addComponent(txtDuracion)
+                    .addComponent(txtCalificacion)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTemporadas, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(txtEpisodiosPorTemporada))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtTemporadas, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(90, 90, 90)
-                        .addComponent(txtID))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEpisodiosPorTemporada))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(72, 72, 72)
-                        .addComponent(txtTitulo))
-                    .addComponent(btnGuardar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(54, 54, 54)
-                        .addComponent(txtDuracion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(42, 42, 42)
-                        .addComponent(txtCalificacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(25, 25, 25)
-                        .addComponent(txtFechaEstreno)))
-                .addGap(23, 23, 23))
+                        .addGap(113, 113, 113)
+                        .addComponent(btnGuardar)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,11 +162,11 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTemporadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,7 +176,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
                     .addComponent(txtEpisodiosPorTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnGuardar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,11 +196,19 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
             String id = txtID.getText().trim();
             String titulo = txtTitulo.getText().trim();
 
-            // Validar que los campos de texto no estén vacíos
-            if (id.isEmpty() || titulo.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos de texto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            // Capturar la fecha del JDateChooser
+            java.util.Date fechaSeleccionada = jDateChooser1.getDate();
+
+            // Validar campos vacíos y fecha
+            if (id.isEmpty() || titulo.isEmpty() || fechaSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos obligatorios, incluida la fecha de estreno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            // Convertir java.util.Date a java.time.LocalDate
+            java.time.LocalDate fechaEstreno = fechaSeleccionada.toInstant()
+                    .atZone(java.time.ZoneId.systemDefault())
+                    .toLocalDate();
 
             // 2. Parsear Numéricos
             int duracionMinutos = Integer.parseInt(txtDuracion.getText().trim());
@@ -223,34 +224,28 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
             int temporadas = Integer.parseInt(txtTemporadas.getText().trim());
             int episodiosPorTemporada = Integer.parseInt(txtEpisodiosPorTemporada.getText().trim());
 
-            // 3. Parsear Fecha (dd/MM/yyyy)
-            // 3. Parsear Fecha (dd/MM/yyyy)
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fechaEstreno = LocalDate.parse(txtFechaEstreno.getText().trim(), formatter);
+            // 3. Crear instancia con el Builder
+            Serie nuevaSerie = Serie.builder()
+                    .id(id)
+                    .titulo(titulo)
+                    .duracionMinutos(duracionMinutos)
+                    .calificacion(calificacion)
+                    .fechaEstreno(fechaEstreno)
+                    .temporadas(temporadas)
+                    .episodios(episodiosPorTemporada)
+                    .build();
 
-        Serie nuevaSerie = Serie.builder()
-                .id(id)
-                .titulo(titulo)
-                .duracionMinutos(duracionMinutos)
-                .calificacion(calificacion)
-                .fechaEstreno(fechaEstreno)
-                .temporadas(temporadas)
-                .episodios(episodiosPorTemporada)
-                .build();
-
-        boolean exito = ServicioContenido.getInstance().addContenido(nuevaSerie);
+            boolean exito = ServicioContenido.getInstance().addContenido(nuevaSerie);
 
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Serie guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 limpiarCampos();
             } else {
-                JOptionPane.showMessageDialog(this, "Ya existe una película o serie registrada con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Ya existe un contenido registrado con ese ID.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error en los datos numéricos (Duración, Calificación, Temporadas o Episodios). Verifique que ingresó números válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(this, "Error en la Fecha de Estreno. Use el formato exacto: dd/MM/yyyy", "Error de Fecha", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -283,6 +278,7 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -294,7 +290,6 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
     private javax.swing.JTextField txtCalificacion;
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtEpisodiosPorTemporada;
-    private javax.swing.JTextField txtFechaEstreno;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTemporadas;
     private javax.swing.JTextField txtTitulo;

@@ -8,7 +8,7 @@ import Model.Contenido;
 import Model.Pelicula;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import javax.swing.DefaultListModel;
+import servicios.IObservador;
 import javax.swing.table.DefaultTableModel;
 import servicios.ServicioContenido;
 
@@ -16,7 +16,7 @@ import servicios.ServicioContenido;
  *
  * @author jamed
  */
-public class GUIListarPelicula extends javax.swing.JFrame {
+public class GUIListarPelicula extends javax.swing.JFrame implements IObservador {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarPelicula.class.getName());
 
@@ -28,7 +28,42 @@ public class GUIListarPelicula extends javax.swing.JFrame {
         this.setResizable(false);
         this.pack(); 
         this.setLocationRelativeTo(null);
+        
+        ServicioContenido.getInstance().registrarObservador(this);
+        cargarTablaPeliculas();
     }
+    
+    // Método que actualiza la tabla (extraído para reusar)
+    public void cargarTablaPeliculas() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaPeliculas.getModel();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        modelo.setRowCount(0);
+
+        modelo.setColumnIdentifiers(new String[]{
+            "ID", "Título", "Duración", "Calificación", "Estreno", "Es Saga", "Taquilla", "Alquiler"
+        });
+
+        Map<String, Contenido> peliculas = ServicioContenido.getInstance().getPeliculas();
+        if (peliculas != null) {
+            for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
+                if (c.getValue() instanceof Pelicula) {
+                Pelicula p = (Pelicula) c.getValue();
+                Object[] fila = new Object[]{
+                    p.getId(),
+                    p.getTitulo(),
+                    p.getDuracionMinutos() + " min",
+                    p.getCalificacion() + " ★",
+                    p.getFechaEstreno() != null ? p.getFechaEstreno().format(formatter) : "",
+                    p.isEsSaga() ? "Sí" : "No",
+                    "$" + String.format("%.2f", p.getRecaudacionTaquilla()),
+                    "$" + String.format("%.2f", p.calcularAlquiler())
+                };
+                modelo.addRow(fila);
+            }
+        }
+    }
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,33 +130,7 @@ public class GUIListarPelicula extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPeliculaActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tablaPeliculas.getModel();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        modelo.setRowCount(0); // 1. Limpia la tabla para evitar duplicados
-
-        // 2. Definir las cabeceras/columnas de la tabla para que coincidan con los datos
-        modelo.setColumnIdentifiers(new String[]{
-            "ID", "Título", "Duración", "Calificación", "Estreno", "Es Saga", "Taquilla", "Alquiler"
-        });
-
-        // 3. Recorrer la lista
-        Map <String, Contenido> peliculas;
-        peliculas = ServicioContenido.getInstance().getPeliculas();
-        for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
-            Pelicula p = (Pelicula) c.getValue();
-            
-            Object[] fila = new Object[]{
-                p.getId(),
-                p.getTitulo(),
-                p.getDuracionMinutos() + " min",
-                p.getCalificacion() + " ★",
-                p.getFechaEstreno().format(formatter),
-                p.isEsSaga() ? "Sí" : "No",
-                "$" + String.format("%.2f", p.getRecaudacionTaquilla()),
-                "$" + String.format("%.2f", p.calcularAlquiler())
-            };
-            modelo.addRow(fila); // Agrega la fila a la tabla
-        }
+        cargarTablaPeliculas();
     }//GEN-LAST:event_btnListarPeliculaActionPerformed
 
     /**
@@ -155,4 +164,10 @@ public class GUIListarPelicula extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaPeliculas;
     // End of variables declaration//GEN-END:variables
+
+
+    @Override
+    public void notificarCambio() {
+        cargarTablaPeliculas();
+    }
 }

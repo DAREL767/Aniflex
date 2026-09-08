@@ -5,7 +5,6 @@
 package Interfaz;
 
 import Model.Pelicula;
-import Model.Serie;
 import javax.swing.JOptionPane;
 import servicios.ServicioContenido;
 
@@ -37,8 +36,13 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
-        jButtonBorrar = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
+        btnBuscarPelicula = new javax.swing.JButton();
+        btnBorrarPelicula = new javax.swing.JButton();
+        lblResultadoTitulo = new javax.swing.JLabel();
+        lblResultadoDuracion = new javax.swing.JLabel();
+        lblResultadoCalificacion = new javax.swing.JLabel();
+        lblResultadoEstreno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminación");
@@ -49,62 +53,130 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel7.setText("Ingrese la ID de la película a eliminar");
 
-        jTextFieldID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButtonBorrar.setText("Borrar");
-        jButtonBorrar.addActionListener(this::jButtonBorrarActionPerformed);
+        btnBuscarPelicula.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnBuscarPelicula.setText("Buscar");
+        btnBuscarPelicula.addActionListener(this::btnBuscarPeliculaActionPerformed);
+
+        btnBorrarPelicula.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnBorrarPelicula.setText("Borrar");
+        btnBorrarPelicula.addActionListener(this::btnBorrarPeliculaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButtonBorrar)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel1))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(68, 68, 68)
+                            .addComponent(btnBuscarPelicula)
+                            .addGap(45, 45, 45)
+                            .addComponent(btnBorrarPelicula))
+                        .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(txtID, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblResultadoEstreno)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblResultadoDuracion)
+                                .addComponent(lblResultadoTitulo)
+                                .addComponent(lblResultadoCalificacion)))))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonBorrar)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoDuracion)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoCalificacion)
+                .addGap(18, 18, 18)
+                .addComponent(lblResultadoEstreno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarPelicula)
+                    .addComponent(btnBorrarPelicula))
                 .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        String id = jTextFieldID.getText();
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                Pelicula p = ServicioContenido.getInstance().searchPelicula(id);
-                int respuesta = JOptionPane.showConfirmDialog(this, 
-                        ("¿Está seguro de que desea borrar la siguiente pelicula? \n" + p.getDetalles()), 
-                        "Confirmar", 
-                        JOptionPane.YES_NO_OPTION);
-                
-                if (respuesta == JOptionPane.YES_OPTION){
-                    ServicioContenido.getInstance().delPelicula(id);
-                    JOptionPane.showMessageDialog(this, "Pelicula eliminada correctamente");
-                }
-            } catch (IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+    private void btnBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPeliculaActionPerformed
+        String id = txtID.getText().trim();
+
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        btnBorrarPelicula.setEnabled(false);
+        Pelicula p = ServicioContenido.getInstance().searchPelicula(id);
+
+        lblResultadoTitulo.setText("Título: " + p.getTitulo());
+        lblResultadoDuracion.setText("Duración: " + p.getDuracionMinutos() + " min");
+        lblResultadoCalificacion.setText("Calificación: " + p.getCalificacion() + " ★");
+
+        btnBorrarPelicula.setEnabled(true);
+
+    } catch (IllegalArgumentException e) {
+        // Si no se encuentra, limpiamos los labels y mostramos error
+        limpiarLabels();
+        btnBorrarPelicula.setEnabled(false);
+        JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void limpiarLabels() {
+    lblResultadoTitulo.setText("Título: -");
+    lblResultadoDuracion.setText("Duración: -");
+    lblResultadoCalificacion.setText("Calificación: -");
+    }//GEN-LAST:event_btnBuscarPeliculaActionPerformed
+
+    private void btnBorrarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPeliculaActionPerformed
+       String id = txtID.getText().trim();
+
+    int confirmacion = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de que desea eliminar esta película?",
+            "Confirmar Eliminación",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        try {
+            ServicioContenido.getInstance().delPelicula(id);
+            
+            // Limpieza tras eliminar
+            txtID.setText("");
+            limpiarLabels();
+            btnBorrarPelicula.setEnabled(false);
+
+            JOptionPane.showMessageDialog(this, "Película eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButtonBorrarActionPerformed
+    }
+    }//GEN-LAST:event_btnBorrarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,9 +204,14 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton btnBorrarPelicula;
+    private javax.swing.JButton btnBuscarPelicula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JLabel lblResultadoCalificacion;
+    private javax.swing.JLabel lblResultadoDuracion;
+    private javax.swing.JLabel lblResultadoEstreno;
+    private javax.swing.JLabel lblResultadoTitulo;
+    private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }
