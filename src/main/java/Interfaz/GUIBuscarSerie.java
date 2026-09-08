@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package interfaz;
+package Interfaz;
 
 import Model.Pelicula;
 import Model.Serie;
@@ -201,7 +201,7 @@ public class GUIBuscarSerie extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Serie resultado = ServicioContenido.searchSerie(id);
+                Serie resultado = ServicioContenido.getInstance().searchSerie(id);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 txtID1.setText(resultado.getId());

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package interfaz;
+package Interfaz;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -107,7 +107,7 @@ public class GUICalcularRetencionSerie extends javax.swing.JFrame {
         String id = jTextFieldID.getText();
         
         try{
-            double ret = ServicioContenido.calcRetencion(id);
+            double ret = ServicioContenido.getInstance().calcRetencion(id);
             jLabelCalculo.setText(String.valueOf(ret));
         }catch(IllegalArgumentException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

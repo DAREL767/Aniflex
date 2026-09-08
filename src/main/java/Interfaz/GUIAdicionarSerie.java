@@ -4,6 +4,7 @@
  */
 package Interfaz;
 
+import Model.Pelicula;
 import Model.Serie;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -227,11 +228,17 @@ public class GUIAdicionarSerie extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate fechaEstreno = LocalDate.parse(txtFechaEstreno.getText().trim(), formatter);
 
-            // 4. Instanciar el objeto Serie
-            Serie nuevaSerie = new Serie(id, titulo, duracionMinutos, calificacion, fechaEstreno, temporadas, episodiosPorTemporada);
+        Serie nuevaSerie = Serie.builder()
+                .id(id)
+                .titulo(titulo)
+                .duracionMinutos(duracionMinutos)
+                .calificacion(calificacion)
+                .fechaEstreno(fechaEstreno)
+                .temporadas(temporadas)
+                .episodios(episodiosPorTemporada)
+                .build();
 
-            // 5. Enviar al Servicio/Controlador
-            boolean exito = ServicioContenido.addContenido(nuevaSerie);
+        boolean exito = ServicioContenido.getInstance().addContenido(nuevaSerie);
 
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Serie guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

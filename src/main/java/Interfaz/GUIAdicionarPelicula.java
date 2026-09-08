@@ -223,19 +223,17 @@ public class GUIAdicionarPelicula extends javax.swing.JFrame {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate fechaEstreno = LocalDate.parse(fechaStr, formatter);
 
-            // 6. Instanciar la Película con el nuevo constructor
-            Pelicula nuevaPelicula = new Pelicula(
-                    id,
-                    titulo,
-                    duracion,
-                    calificacion,
-                    fechaEstreno,
-                    esSaga,
-                    recaudacionTaquilla
-            );
+        Pelicula nuevaPelicula = Pelicula.builder()
+                .id(id)
+                .titulo(titulo)
+                .duracionMinutos(duracion)
+                .calificacion(calificacion)
+                .fechaEstreno(fechaEstreno)
+                .esSaga(esSaga)
+                .recaudacionTaquilla(recaudacionTaquilla)
+                .build();
 
-            // 7. Enviar al Servicio/Controlador
-            boolean exito = ServicioContenido.addContenido(nuevaPelicula);
+        boolean exito = ServicioContenido.getInstance().addContenido(nuevaPelicula);
 
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Película guardada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

@@ -216,7 +216,7 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Pelicula resultado = ServicioContenido.searchPelicula(id);
+                Pelicula resultado = ServicioContenido.getInstance().searchPelicula(id);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 txtID1.setText(resultado.getId());

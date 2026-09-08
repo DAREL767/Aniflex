@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package interfaz;
+package Interfaz;
 
 import Model.Serie;
 import javax.swing.JOptionPane;
@@ -89,14 +89,14 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Serie s = ServicioContenido.searchSerie(id);
+                Serie s = ServicioContenido.getInstance().searchSerie(id);
                 int respuesta = JOptionPane.showConfirmDialog(this, 
                         ("¿Está seguro de que desea borrar la siguiente serie? \n" + s.getDetalles()), 
                         "Confirmar", 
                         JOptionPane.YES_NO_OPTION);
                 
                 if (respuesta == JOptionPane.YES_OPTION){
-                    ServicioContenido.delSerie(id);
+                    ServicioContenido.getInstance().delSerie(id);
                     JOptionPane.showMessageDialog(this, "Serie eliminada correctamente");
                 }
             } catch (IllegalArgumentException e) {

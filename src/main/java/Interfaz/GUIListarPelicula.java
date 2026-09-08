@@ -106,7 +106,7 @@ public class GUIListarPelicula extends javax.swing.JFrame {
 
         // 3. Recorrer la lista
         Map <String, Contenido> peliculas;
-        peliculas = ServicioContenido.getPeliculas();
+        peliculas = ServicioContenido.getInstance().getPeliculas();
         for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
             Pelicula p = (Pelicula) c.getValue();
             

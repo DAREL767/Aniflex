@@ -111,7 +111,7 @@ public class GUIListarSerie extends javax.swing.JFrame {
 
         // 3. Recorre las series almacenadas
         Map <String, Contenido> series;
-        series = ServicioContenido.getSeries();
+        series = ServicioContenido.getInstance().getSeries();
         for (Map.Entry<String, Contenido> c : series.entrySet()) {
             String id = c.getKey();
             Serie s = (Serie) c.getValue();

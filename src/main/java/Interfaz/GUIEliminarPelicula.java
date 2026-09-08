@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package interfaz;
+package Interfaz;
 
 import Model.Pelicula;
 import Model.Serie;
@@ -90,14 +90,14 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Pelicula p = ServicioContenido.searchPelicula(id);
+                Pelicula p = ServicioContenido.getInstance().searchPelicula(id);
                 int respuesta = JOptionPane.showConfirmDialog(this, 
                         ("¿Está seguro de que desea borrar la siguiente pelicula? \n" + p.getDetalles()), 
                         "Confirmar", 
                         JOptionPane.YES_NO_OPTION);
                 
                 if (respuesta == JOptionPane.YES_OPTION){
-                    ServicioContenido.delPelicula(id);
+                    ServicioContenido.getInstance().delPelicula(id);
                     JOptionPane.showMessageDialog(this, "Pelicula eliminada correctamente");
                 }
             } catch (IllegalArgumentException e) {

@@ -4,12 +4,6 @@
  */
 package Interfaz;
 
-import interfaz.GUIBuscarSerie;
-import interfaz.GUICalcularRetencionPelicula;
-import interfaz.GUICalcularRetencionSerie;
-import interfaz.GUIEliminarPelicula;
-import interfaz.GUIEliminarSerie;
-
 /**
  *
  * @author jamed
