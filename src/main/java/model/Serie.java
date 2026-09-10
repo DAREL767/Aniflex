@@ -15,9 +15,10 @@ import java.util.List;
 @Setter
 @SuperBuilder
 public class Serie extends Contenido {
+
     private int temporadas;
     private int episodios;
-    
+
     @lombok.Builder.Default
     private List<Episodio> listaEpisodios = new ArrayList<>();
 
@@ -30,25 +31,34 @@ public class Serie extends Contenido {
 
     @Override
     public double calcularRetencion() {
-        if (episodios == 0) return 0.0;
+        if (episodios == 0) {
+            return 0.0;
+        }
         double horasTotales = (getDuracionMinutos() / (double) episodios) / 60.0;
         return getCalificacion() * (1 + (horasTotales * 0.05));
     }
 
     @Override
     public String getDetalles() {
-        return "📺 [SERIE] " + getTitulo() + 
-               " | ID: " + getId() + 
-               " | Temporadas: " + temporadas + 
-               " | Episodios: " + episodios + 
-               " | Calificación: " + getCalificacion() + "★" + 
-               " | Retención: " + String.format("%.2f", calcularRetencion()) + " pts";
+        return "📺 [SERIE] " + getTitulo()
+                + " | ID: " + getId()
+                + " | Temporadas: " + temporadas
+                + " | Episodios: " + episodios
+                + " | Calificación: " + getCalificacion() + "★"
+                + " | Retención: " + String.format("%.2f", calcularRetencion()) + " pts";
     }
 
     public void agregarEpisodio(Episodio ep) {
         if (this.listaEpisodios == null) {
             this.listaEpisodios = new ArrayList<>();
         }
+        boolean existe = listaEpisodios.stream()
+                .anyMatch(e -> e.getNoEpisodio() == ep.getNoEpisodio());
+
+        if (existe) {
+            throw new IllegalArgumentException("Ya existe un episodio con el número " + ep.getNoEpisodio());
+        }
+
         this.listaEpisodios.add(ep);
     }
 }
