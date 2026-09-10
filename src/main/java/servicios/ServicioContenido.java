@@ -180,4 +180,27 @@ public class ServicioContenido implements IServicioContenido {
         serie.getListaEpisodios().removeIf(e -> e.getNoEpisodio() == noEpisodio);
         notificarObservadores();
     }
+
+    @Override
+    public Episodio searchEpisodio(String idSerie, int noEpisodio) {
+        Serie serie = searchSerie(idSerie); // previa búsqueda de la serie contenedora
+        return serie.getListaEpisodios().stream()
+                .filter(e -> e.getNoEpisodio() == noEpisodio)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No existe el episodio " + noEpisodio + " en la serie " + idSerie));
+    }
+
+    @Override
+    public void updateEpisodio(String idSerie, int noEpisodio, String nuevoTitulo) {
+        Episodio episodio = searchEpisodio(idSerie, noEpisodio); // previa búsqueda individual
+        episodio.setTitulo(nuevoTitulo);
+        notificarObservadores();
+    }
+
+    @Override
+    public List<Episodio> listEpisodiosDeSerie(String idSerie) {
+        Serie serie = searchSerie(idSerie);
+        return List.copyOf(serie.getListaEpisodios());
+    }
 }

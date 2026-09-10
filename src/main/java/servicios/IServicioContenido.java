@@ -1,9 +1,11 @@
 package servicios;
 
 import Model.Contenido;
+import Model.Episodio;
 import Model.Pelicula;
 import Model.Serie;
 import servicios.ISujeto;
+import java.util.List;
 import java.util.Map;
 
 public interface IServicioContenido extends ISujeto {
@@ -21,4 +23,7 @@ public interface IServicioContenido extends ISujeto {
     
     void addEpisodioASerie(String idSerie, int noEpisodio, String titulo);
     void delEpisodioDeSerie(String idSerie, int noEpisodio);
+    Episodio searchEpisodio(String idSerie, int noEpisodio);
+    void updateEpisodio(String idSerie, int noEpisodio, String nuevoTitulo);
+    List<Episodio> listEpisodiosDeSerie(String idSerie);
 }

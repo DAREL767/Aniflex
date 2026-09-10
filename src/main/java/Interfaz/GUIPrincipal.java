@@ -17,9 +17,40 @@ public class GUIPrincipal extends javax.swing.JFrame {
      */
     public GUIPrincipal() {
         initComponents();
+        agregarMenuEpisodios();
         this.setResizable(false);
         this.pack(); 
         this.setLocationRelativeTo(null);
+    }
+
+    // Menú agregado a mano (no generado por el editor visual) para el CRUD de Episodio (clase D)
+    private void agregarMenuEpisodios() {
+        javax.swing.JMenu menuEpisodios = new javax.swing.JMenu("Episodios");
+
+        javax.swing.JMenuItem itemAdicionar = new javax.swing.JMenuItem("Adicionar");
+        itemAdicionar.addActionListener(e -> new GUIAdicionarEpisodio().setVisible(true));
+
+        javax.swing.JMenuItem itemBuscar = new javax.swing.JMenuItem("Buscar");
+        itemBuscar.addActionListener(e -> new GUIBuscarEpisodio().setVisible(true));
+
+        javax.swing.JMenuItem itemActualizar = new javax.swing.JMenuItem("Actualizar");
+        itemActualizar.addActionListener(e -> new GUIActualizarEpisodio().setVisible(true));
+
+        javax.swing.JMenuItem itemEliminar = new javax.swing.JMenuItem("Eliminar");
+        itemEliminar.addActionListener(e -> new GUIEliminarEpisodio().setVisible(true));
+
+        javax.swing.JMenuItem itemListar = new javax.swing.JMenuItem("Listar");
+        itemListar.addActionListener(e -> new GUIListarEpisodio().setVisible(true));
+
+        menuEpisodios.add(itemAdicionar);
+        menuEpisodios.add(itemBuscar);
+        menuEpisodios.add(itemActualizar);
+        menuEpisodios.add(itemEliminar);
+        menuEpisodios.add(itemListar);
+
+        // Se inserta antes del último menú (Ayuda), en vez de al final de la barra
+        int posicionAntesDeAyuda = getJMenuBar().getMenuCount() - 1;
+        getJMenuBar().add(menuEpisodios, posicionAntesDeAyuda);
     }
 
     /**
