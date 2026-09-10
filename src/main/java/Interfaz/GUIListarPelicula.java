@@ -8,17 +8,19 @@ import Model.Contenido;
 import Model.Pelicula;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import servicios.IObservador;
 import javax.swing.table.DefaultTableModel;
 import servicios.ServicioContenido;
+import servicios.ICambiable;
+import servicios.ServicioObserver;
 
 /**
  *
  * @author jamed
  */
-public class GUIListarPelicula extends javax.swing.JFrame implements IObservador {
+public class GUIListarPelicula extends javax.swing.JFrame implements ICambiable {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarPelicula.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIListarPelicula
@@ -29,7 +31,8 @@ public class GUIListarPelicula extends javax.swing.JFrame implements IObservador
         this.pack(); 
         this.setLocationRelativeTo(null);
         
-        ServicioContenido.getInstance().registrarObservador(this);
+        ServicioObserver.addGUIListar(this);
+        servicio = ServicioContenido.getInstance();
         cargarTablaPeliculas();
     }
     
@@ -43,7 +46,7 @@ public class GUIListarPelicula extends javax.swing.JFrame implements IObservador
             "ID", "Título", "Duración", "Calificación", "Estreno", "Es Saga", "Taquilla", "Alquiler"
         });
 
-        Map<String, Contenido> peliculas = ServicioContenido.getInstance().getPeliculas();
+        Map<String, Contenido> peliculas = servicio.getPeliculas();
         if (peliculas != null) {
             for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
                 if (c.getValue() instanceof Pelicula) {
@@ -167,7 +170,7 @@ public class GUIListarPelicula extends javax.swing.JFrame implements IObservador
 
 
     @Override
-    public void notificarCambio() {
+    public void cambio() {
         cargarTablaPeliculas();
     }
 }

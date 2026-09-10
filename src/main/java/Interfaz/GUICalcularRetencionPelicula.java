@@ -15,6 +15,7 @@ import servicios.ServicioContenido;
 public class GUICalcularRetencionPelicula extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUICalcularRetencionPelicula.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUICalcularRetencionSerie
@@ -24,6 +25,7 @@ public class GUICalcularRetencionPelicula extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         jLabelCalculo.setHorizontalAlignment(SwingConstants.CENTER);
+        servicio = ServicioContenido.getInstance();
     }
 
     /**
@@ -107,7 +109,7 @@ public class GUICalcularRetencionPelicula extends javax.swing.JFrame {
         String id = jTextFieldID.getText();
         
         try{
-            double ret = ServicioContenido.getInstance().calcRetencion(id);
+            double ret = servicio.calcRetencion(id);
             jLabelCalculo.setText(String.valueOf(ret));
         }catch(IllegalArgumentException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

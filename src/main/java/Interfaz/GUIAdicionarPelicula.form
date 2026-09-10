@@ -36,34 +36,25 @@
                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtID1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtTitulo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtDuracion" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtCalificacion" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="txtRecaudacion" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbEsSaga" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="cmbEsSaga" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtID1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtTitulo" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtDuracion" alignment="1" max="32767" attributes="0"/>
+                  <Component id="txtCalificacion" alignment="0" pref="170" max="32767" attributes="0"/>
+                  <Component id="txtRecaudacion" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jDateChooser1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="2" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                       <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -113,9 +104,9 @@
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRecaudacion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

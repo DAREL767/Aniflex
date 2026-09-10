@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Model.Pelicula;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import servicios.ServicioContenido;
 
@@ -15,6 +16,7 @@ import servicios.ServicioContenido;
 public class GUIEliminarPelicula extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIEliminarPelicula.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIEliminarSerie
@@ -23,6 +25,7 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        servicio = ServicioContenido.getInstance();
     }
 
     /**
@@ -43,6 +46,20 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
         lblResultadoDuracion = new javax.swing.JLabel();
         lblResultadoCalificacion = new javax.swing.JLabel();
         lblResultadoEstreno = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtDuracion = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        txtCalificacion = new javax.swing.JTextField();
+        txtID1 = new javax.swing.JTextField();
+        txtFechaEstreno = new javax.swing.JTextField();
+        txtEsSaga = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtRecaudacion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminación");
@@ -63,33 +80,88 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
         btnBorrarPelicula.setText("Borrar");
         btnBorrarPelicula.addActionListener(this::btnBorrarPeliculaActionPerformed);
 
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel2.setText("Título:");
+
+        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel4.setText("Duración:");
+
+        jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel5.setText("Calificación:");
+
+        jLabel6.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel6.setText("Fecha Estreno:");
+
+        txtDuracion.setEditable(false);
+        txtDuracion.addActionListener(this::txtDuracionActionPerformed);
+
+        txtTitulo.setEditable(false);
+
+        txtCalificacion.setEditable(false);
+
+        txtID1.setEditable(false);
+
+        txtFechaEstreno.setEditable(false);
+        txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
+
+        txtEsSaga.setEditable(false);
+        txtEsSaga.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
+
+        jLabel9.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel9.setText("Saga: ");
+
+        jLabel8.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel8.setText("ID:");
+
+        jLabel10.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel10.setText("Recaudación Taquilla: ");
+
+        txtRecaudacion.setEditable(false);
+        txtRecaudacion.setToolTipText("0 si salio exclusivamente para plataformas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(68, 68, 68)
-                            .addComponent(btnBuscarPelicula)
-                            .addGap(45, 45, 45)
-                            .addComponent(btnBorrarPelicula))
-                        .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(txtID, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblResultadoEstreno)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblResultadoDuracion)
-                                .addComponent(lblResultadoTitulo)
-                                .addComponent(lblResultadoCalificacion)))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFechaEstreno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEsSaga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRecaudacion, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarPelicula))
+                            .addComponent(btnBorrarPelicula, javax.swing.GroupLayout.Alignment.CENTER))
+                        .addGap(48, 48, 48)))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblResultadoEstreno)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblResultadoDuracion)
+                        .addComponent(lblResultadoTitulo)
+                        .addComponent(lblResultadoCalificacion))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,21 +170,61 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblResultadoTitulo)
-                .addGap(18, 18, 18)
-                .addComponent(lblResultadoDuracion)
-                .addGap(18, 18, 18)
-                .addComponent(lblResultadoCalificacion)
-                .addGap(18, 18, 18)
-                .addComponent(lblResultadoEstreno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarPelicula)
-                    .addComponent(btnBorrarPelicula))
-                .addGap(16, 16, 16))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarPelicula))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(lblResultadoTitulo)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblResultadoDuracion)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblResultadoCalificacion)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblResultadoEstreno)
+                        .addContainerGap(283, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtID1)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTitulo)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDuracion)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEsSaga))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtRecaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBorrarPelicula)
+                        .addGap(17, 17, 17))))
         );
 
         pack();
@@ -121,62 +233,79 @@ public class GUIEliminarPelicula extends javax.swing.JFrame {
     private void btnBuscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPeliculaActionPerformed
         String id = txtID.getText().trim();
 
-    if (id.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return;
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            btnBorrarPelicula.setEnabled(false);
+            Pelicula p = servicio.searchPelicula(id);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            txtID1.setText(p.getId());
+            txtTitulo.setText(p.getTitulo());
+            txtDuracion.setText(String.valueOf(p.getDuracionMinutos()));
+            txtCalificacion.setText(String.format("%.2f", p.getCalificacion()));
+            txtFechaEstreno.setText(p.getFechaEstreno().format(formatter));
+            if (p.isEsSaga()) {
+                txtEsSaga.setText("Si");
+            } else {
+                txtEsSaga.setText("No");
+            }
+            txtRecaudacion.setText(String.format("%.2f", p.getRecaudacionTaquilla()));
+
+            btnBorrarPelicula.setEnabled(true);
+
+        } catch (IllegalArgumentException e) {
+            // Si no se encuentra, limpiamos los labels y mostramos error
+            limpiarLabels();
+            btnBorrarPelicula.setEnabled(false);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    try {
-        btnBorrarPelicula.setEnabled(false);
-        Pelicula p = ServicioContenido.getInstance().searchPelicula(id);
-
-        lblResultadoTitulo.setText("Título: " + p.getTitulo());
-        lblResultadoDuracion.setText("Duración: " + p.getDuracionMinutos() + " min");
-        lblResultadoCalificacion.setText("Calificación: " + p.getCalificacion() + " ★");
-
-        btnBorrarPelicula.setEnabled(true);
-
-    } catch (IllegalArgumentException e) {
-        // Si no se encuentra, limpiamos los labels y mostramos error
-        limpiarLabels();
-        btnBorrarPelicula.setEnabled(false);
-        JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
-    }
-}
-
-private void limpiarLabels() {
-    lblResultadoTitulo.setText("Título: -");
-    lblResultadoDuracion.setText("Duración: -");
-    lblResultadoCalificacion.setText("Calificación: -");
+    private void limpiarLabels() {
+        txtID1.setText("");
+        txtCalificacion.setText("");
+        txtDuracion.setText("");
+        txtEsSaga.setText("");
+        txtFechaEstreno.setText("");
+        txtRecaudacion.setText("");
+        txtTitulo.setText("");
     }//GEN-LAST:event_btnBuscarPeliculaActionPerformed
 
     private void btnBorrarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPeliculaActionPerformed
-       String id = txtID.getText().trim();
+        String id = txtID.getText().trim();
 
-    int confirmacion = JOptionPane.showConfirmDialog(
-            this,
-            "¿Está seguro de que desea eliminar esta película?",
-            "Confirmar Eliminación",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-    );
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de que desea eliminar esta película?",
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
 
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        try {
-            ServicioContenido.getInstance().delPelicula(id);
-            
-            // Limpieza tras eliminar
-            txtID.setText("");
-            limpiarLabels();
-            btnBorrarPelicula.setEnabled(false);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            try {
+                servicio.delPelicula(id);
 
-            JOptionPane.showMessageDialog(this, "Película eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Limpieza tras eliminar
+                txtID.setText("");
+                limpiarLabels();
+                btnBorrarPelicula.setEnabled(false);
 
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Película eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }
     }//GEN-LAST:event_btnBorrarPeliculaActionPerformed
+
+    private void txtDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +336,25 @@ private void limpiarLabels() {
     private javax.swing.JButton btnBorrarPelicula;
     private javax.swing.JButton btnBuscarPelicula;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblResultadoCalificacion;
     private javax.swing.JLabel lblResultadoDuracion;
     private javax.swing.JLabel lblResultadoEstreno;
     private javax.swing.JLabel lblResultadoTitulo;
+    private javax.swing.JTextField txtCalificacion;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtEsSaga;
+    private javax.swing.JTextField txtFechaEstreno;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtID1;
+    private javax.swing.JTextField txtRecaudacion;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

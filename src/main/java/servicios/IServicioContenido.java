@@ -4,11 +4,10 @@ import Model.Contenido;
 import Model.Episodio;
 import Model.Pelicula;
 import Model.Serie;
-import servicios.ISujeto;
 import java.util.List;
 import java.util.Map;
 
-public interface IServicioContenido extends ISujeto {
+public interface IServicioContenido{
     boolean addContenido(Contenido con);
     void delContenido(String id);
     void delPelicula(String id);

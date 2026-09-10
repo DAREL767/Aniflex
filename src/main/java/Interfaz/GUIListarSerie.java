@@ -8,17 +8,19 @@ import Model.Contenido;
 import Model.Serie;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import servicios.IObservador;
 import javax.swing.table.DefaultTableModel;
 import servicios.ServicioContenido;
+import servicios.ICambiable;
+import servicios.ServicioObserver;
 
 /**
  *
  * @author jamed
  */
-public class GUIListarSerie extends javax.swing.JFrame implements IObservador {
+public class GUIListarSerie extends javax.swing.JFrame implements ICambiable {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarSerie.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIListarSerie
@@ -29,7 +31,8 @@ public class GUIListarSerie extends javax.swing.JFrame implements IObservador {
         this.pack();
         this.setLocationRelativeTo(null);
         
-        ServicioContenido.getInstance().registrarObservador(this);
+        ServicioObserver.addGUIListar(this);
+        servicio = ServicioContenido.getInstance();
         cargarTablaSeries();
     }
     
@@ -42,7 +45,7 @@ public class GUIListarSerie extends javax.swing.JFrame implements IObservador {
         "ID", "Título", "Duración", "Calificación", "Estreno", "Temporadas", "No. Episodios"
         });
 
-        Map<String, Contenido> series = ServicioContenido.getInstance().getSeries();
+        Map<String, Contenido> series = servicio.getSeries();
         if (series != null) {
             for (Map.Entry<String, Contenido> c : series.entrySet()) {
                 if (c.getValue() instanceof Serie) {
@@ -172,7 +175,7 @@ public class GUIListarSerie extends javax.swing.JFrame implements IObservador {
 
 
     @Override
-    public void notificarCambio() {
+    public void cambio() {
         cargarTablaSeries();
     }
 }

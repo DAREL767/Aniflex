@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class GUIBuscarSerie extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIBuscarSerie.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIBuscarPelicula
@@ -25,6 +26,7 @@ public class GUIBuscarSerie extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        servicio = ServicioContenido.getInstance();
     }
 
     /**
@@ -201,7 +203,7 @@ public class GUIBuscarSerie extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Serie resultado = ServicioContenido.getInstance().searchSerie(id);
+                Serie resultado = servicio.searchSerie(id);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 txtID1.setText(resultado.getId());

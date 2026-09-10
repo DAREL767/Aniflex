@@ -5,6 +5,7 @@
 package Interfaz;
 
 import Model.Serie;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import servicios.ServicioContenido;
 
@@ -15,6 +16,7 @@ import servicios.ServicioContenido;
 public class GUIEliminarSerie extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIEliminarSerie.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIEliminarSerie
@@ -23,8 +25,9 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        servicio = ServicioContenido.getInstance();
     }
-    
+
     private void limpiarCampos() {
         txtID.setText("");
     }
@@ -46,6 +49,20 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
         lblResultadoTitulo = new javax.swing.JLabel();
         lblResultadoDuracion = new javax.swing.JLabel();
         lblResultadoCalificacion = new javax.swing.JLabel();
+        txtDuracion = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
+        txtCalificacion = new javax.swing.JTextField();
+        txtID1 = new javax.swing.JTextField();
+        txtFechaEstreno = new javax.swing.JTextField();
+        txtTemporadas = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtEpisodios = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminación");
@@ -66,6 +83,46 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
         btnBuscarSerie.setText("Buscar");
         btnBuscarSerie.addActionListener(this::btnBuscarSerieActionPerformed);
 
+        txtDuracion.setEditable(false);
+        txtDuracion.addActionListener(this::txtDuracionActionPerformed);
+
+        txtTitulo.setEditable(false);
+
+        txtCalificacion.setEditable(false);
+
+        txtID1.setEditable(false);
+        txtID1.addActionListener(this::txtID1ActionPerformed);
+
+        txtFechaEstreno.setEditable(false);
+        txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
+
+        txtTemporadas.setEditable(false);
+        txtTemporadas.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
+
+        jLabel9.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel9.setText("Temporadas:");
+
+        jLabel10.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel10.setText("No. Episodios");
+
+        txtEpisodios.setEditable(false);
+        txtEpisodios.setToolTipText("0 si salio exclusivamente para plataformas");
+
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel2.setText("Título:");
+
+        jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel3.setText("ID:");
+
+        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel4.setText("Duración:");
+
+        jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel5.setText("Calificación:");
+
+        jLabel6.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        jLabel6.setText("Fecha Estreno:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,43 +130,109 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1))
+                        .addGap(62, 62, 62)
+                        .addComponent(lblResultadoCalificacion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(btnBorrarSerie))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnBuscarSerie)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnBorrarSerie))
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblResultadoTitulo)
                             .addComponent(lblResultadoDuracion)
-                            .addComponent(lblResultadoCalificacion))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                            .addComponent(lblResultadoTitulo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
+                                .addGap(48, 48, 48)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEpisodios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                    .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtFechaEstreno)
+                                    .addComponent(txtTemporadas, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel7)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnBuscarSerie))))))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarSerie))
                 .addGap(18, 18, 18)
                 .addComponent(lblResultadoTitulo)
-                .addGap(18, 18, 18)
-                .addComponent(lblResultadoDuracion)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblResultadoDuracion)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTitulo)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDuracion)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                            .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtTemporadas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                            .addComponent(txtEpisodios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblResultadoCalificacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBorrarSerie)
-                    .addComponent(btnBuscarSerie))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnBorrarSerie)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -118,61 +241,79 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
     private void btnBorrarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarSerieActionPerformed
         String id = txtID.getText().trim();
 
-    int confirmacion = JOptionPane.showConfirmDialog(
-            this,
-            "¿Está seguro de que desea eliminar esta serie?",
-            "Confirmar Eliminación",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-    );
+        int confirmacion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de que desea eliminar esta serie?",
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
 
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        try {
-            ServicioContenido.getInstance().delSerie(id);
-            
-            // Limpieza tras eliminar
-            txtID.setText("");
-            limpiarLabels();
-            btnBorrarSerie.setEnabled(false);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            try {
+                servicio.delSerie(id);
 
-            JOptionPane.showMessageDialog(this, "Película eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                // Limpieza tras eliminar
+                txtID.setText("");
+                limpiarLabels();
+                btnBorrarSerie.setEnabled(false);
 
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Serie eliminada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-    }
     }//GEN-LAST:event_btnBorrarSerieActionPerformed
 
     private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
         String id = txtID.getText().trim();
 
-    if (id.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return;
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese la ID a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            btnBorrarSerie.setEnabled(false);
+            Serie s = servicio.searchSerie(id);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            txtID1.setText(s.getId());
+            txtTitulo.setText(s.getTitulo());
+            txtDuracion.setText(String.valueOf(s.getDuracionMinutos()));
+            txtCalificacion.setText(String.format("%.2f", s.getCalificacion()));
+            txtFechaEstreno.setText(s.getFechaEstreno().format(formatter));
+            txtTemporadas.setText(String.valueOf(s.getTemporadas()));
+            txtEpisodios.setText(String.valueOf(s.getEpisodios()));
+
+            btnBorrarSerie.setEnabled(true);
+
+        } catch (IllegalArgumentException e) {
+            limpiarLabels();
+            btnBorrarSerie.setEnabled(false);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    try {
-        btnBorrarSerie.setEnabled(false);
-        Serie s = ServicioContenido.getInstance().searchSerie(id);
-
-        // Actualizamos los Labels
-        lblResultadoTitulo.setText("Título: " + s.getTitulo());
-        lblResultadoDuracion.setText("Duración: " + s.getDuracionMinutos() + " min");
-        lblResultadoCalificacion.setText("Calificación: " + s.getCalificacion() + " ★");
-
-        btnBorrarSerie.setEnabled(true);
-
-    } catch (IllegalArgumentException e) {
-        limpiarLabels();
-        btnBorrarSerie.setEnabled(false);
-        JOptionPane.showMessageDialog(this, e.getMessage(), "No encontrado", JOptionPane.ERROR_MESSAGE);
-    }
-    }
     private void limpiarLabels() {
-    lblResultadoTitulo.setText("Título: -");
-    lblResultadoDuracion.setText("Duración: -");
-    lblResultadoCalificacion.setText("Calificación: -");
+        txtID1.setText("");
+        txtCalificacion.setText("");
+        txtDuracion.setText("");
+        txtTemporadas.setText("");
+        txtFechaEstreno.setText("");
+        txtEpisodios.setText("");
+        txtTitulo.setText("");
     }//GEN-LAST:event_btnBuscarSerieActionPerformed
+
+    private void txtDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuracionActionPerformed
+
+    private void txtID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtID1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtID1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,10 +344,24 @@ public class GUIEliminarSerie extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrarSerie;
     private javax.swing.JButton btnBuscarSerie;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblResultadoCalificacion;
     private javax.swing.JLabel lblResultadoDuracion;
     private javax.swing.JLabel lblResultadoTitulo;
+    private javax.swing.JTextField txtCalificacion;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtEpisodios;
+    private javax.swing.JTextField txtFechaEstreno;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtID1;
+    private javax.swing.JTextField txtTemporadas;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

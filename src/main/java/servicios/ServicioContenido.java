@@ -8,9 +8,7 @@ import Model.Contenido;
 import Model.Episodio;
 import Model.Pelicula;
 import Model.Serie;
-import servicios.IObservador;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +20,9 @@ public class ServicioContenido implements IServicioContenido {
 
     // --- State ---
     private final Map<String, Contenido> contenidos;
-    private final List<IObservador> observadores;
 
     private ServicioContenido() {
         this.contenidos = new HashMap<>();
-        this.observadores = new ArrayList<>();
     }
 
     public static synchronized ServicioContenido getInstance() {
@@ -37,38 +33,19 @@ public class ServicioContenido implements IServicioContenido {
     }
 
     @Override
-    public void registrarObservador(IObservador o) {
-        if (!observadores.contains(o)) {
-            observadores.add(o);
-        }
-    }
-
-    @Override
-    public void removerObservador(IObservador o) {
-        observadores.remove(o);
-    }
-
-    @Override
-    public void notificarObservadores() {
-        for (IObservador o : observadores) {
-            o.notificarCambio();
-        }
-    }
-
-    @Override
     public boolean addContenido(Contenido con) {
         if (contenidos.containsKey(con.getId())) {
             return false;
         }
         contenidos.put(con.getId(), con);
-        notificarObservadores(); 
+        ServicioObserver.cambio();
         return true;
     }
 
     @Override
     public void delContenido(String id) {
         if (contenidos.remove(id) != null) {
-            notificarObservadores();
+            ServicioObserver.cambio();
         }
     }
 
@@ -81,7 +58,7 @@ public class ServicioContenido implements IServicioContenido {
             throw new IllegalArgumentException("La id: " + id + " pertenece a una serie.");
         }
         contenidos.remove(id);
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override
@@ -93,7 +70,7 @@ public class ServicioContenido implements IServicioContenido {
             throw new IllegalArgumentException("La id: " + id + " pertenece a una película.");
         }
         contenidos.remove(id);
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override
@@ -102,7 +79,7 @@ public class ServicioContenido implements IServicioContenido {
             throw new IllegalArgumentException("No existe contenido a actualizar con id: " + con.getId());
         }
         contenidos.put(con.getId(), con);
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override
@@ -171,14 +148,14 @@ public class ServicioContenido implements IServicioContenido {
     public void addEpisodioASerie(String idSerie, int noEpisodio, String titulo) {
         Serie serie = searchSerie(idSerie);
         serie.agregarEpisodio(new Episodio(noEpisodio, titulo));
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override
     public void delEpisodioDeSerie(String idSerie, int noEpisodio) {
         Serie serie = searchSerie(idSerie);
         serie.getListaEpisodios().removeIf(e -> e.getNoEpisodio() == noEpisodio);
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override
@@ -195,7 +172,7 @@ public class ServicioContenido implements IServicioContenido {
     public void updateEpisodio(String idSerie, int noEpisodio, String nuevoTitulo) {
         Episodio episodio = searchEpisodio(idSerie, noEpisodio); // previa búsqueda individual
         episodio.setTitulo(nuevoTitulo);
-        notificarObservadores();
+        ServicioObserver.cambio();
     }
 
     @Override

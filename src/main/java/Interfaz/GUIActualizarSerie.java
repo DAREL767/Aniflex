@@ -13,8 +13,9 @@ import servicios.ServicioContenido;
  * @author jamed
  */
 public class GUIActualizarSerie extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIActualizarSerie.class.getName());
+    private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIActualizarSerie
@@ -24,8 +25,10 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
         this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
+        disableCampos();
+        servicio = ServicioContenido.getInstance();
     }
-    
+
     private void limpiarCampos() {
         txtID.setText("");
         txtTitulo.setText("");
@@ -34,6 +37,26 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
         jDateChooser1.setDate(null);
         txtTemporadas.setText("");
         txtEpisodiosPorTemporada.setText("");
+    }
+
+    private void enableCampos() {
+        txtTitulo.setEnabled(true);
+        txtDuracion.setEnabled(true);
+        txtCalificacion.setEnabled(true);
+        txtTemporadas.setEnabled(true);
+        txtEpisodiosPorTemporada.setEnabled(true);
+        jDateChooser1.setEnabled(true);
+        btnActualizarSerie.setEnabled(true);
+    }
+
+    private void disableCampos() {
+        txtTitulo.setEnabled(false);
+        txtDuracion.setEnabled(false);
+        txtCalificacion.setEnabled(false);
+        txtTemporadas.setEnabled(false);
+        txtEpisodiosPorTemporada.setEnabled(false);
+        jDateChooser1.setEnabled(false);
+        btnActualizarSerie.setEnabled(false);
     }
 
     /**
@@ -107,60 +130,54 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(29, 29, 29)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtCalificacion)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(54, 54, 54)
-                        .addComponent(txtDuracion))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(72, 72, 72)
-                        .addComponent(txtTitulo))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtEpisodiosPorTemporada))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(90, 90, 90)
-                        .addComponent(txtID))
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtTemporadas)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCalificacion)
+                                    .addComponent(txtTitulo)
+                                    .addComponent(txtDuracion)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtTemporadas)
+                                    .addComponent(txtEpisodiosPorTemporada)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(90, 90, 90)
+                                .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarSerie)
+                                .addGap(15, 15, 15))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(btnActualizarSerie)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(btnBuscarSerie)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnActualizarSerie))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(jLabel8)))
-                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarSerie))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -173,11 +190,11 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTemporadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,9 +203,7 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtEpisodiosPorTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarSerie)
-                    .addComponent(btnActualizarSerie))
+                .addComponent(btnActualizarSerie)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -202,35 +217,41 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
     private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
         String id = txtID.getText().trim();
 
-    if (id.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la serie a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-
-    Serie s = ServicioContenido.getInstance().searchSerie(id);
-
-    if (s != null) {
-        txtTitulo.setText(s.getTitulo());
-        txtDuracion.setText(String.valueOf(s.getDuracionMinutos()));
-        txtCalificacion.setText(String.valueOf(s.getCalificacion()));
-        txtTemporadas.setText(String.valueOf(s.getTemporadas()));
-        txtEpisodiosPorTemporada.setText(String.valueOf(s.getEpisodios()));
-
-        if (s.getFechaEstreno() != null) {
-            java.util.Date fechaDate = java.util.Date.from(
-                s.getFechaEstreno().atStartOfDay(java.time.ZoneId.systemDefault()).toInstant()
-            );
-            jDateChooser1.setDate(fechaDate);
-        } else {
-            jDateChooser1.setDate(null);
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la serie a buscar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
-        // Bloquear el ID para proteger la llave primaria
-        txtID.setEditable(false);
-        JOptionPane.showMessageDialog(this, "Serie encontrada.", "Información", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, "No se encontró ninguna serie con el ID proporcionado.", "Sin Resultados", JOptionPane.ERROR_MESSAGE);
-    }
+        try {
+            Serie s = servicio.searchSerie(id);
+            if (s != null) {
+                txtTitulo.setText(s.getTitulo());
+                txtDuracion.setText(String.valueOf(s.getDuracionMinutos()));
+                txtCalificacion.setText(String.valueOf(s.getCalificacion()));
+                txtTemporadas.setText(String.valueOf(s.getTemporadas()));
+                txtEpisodiosPorTemporada.setText(String.valueOf(s.getEpisodios()));
+
+                if (s.getFechaEstreno() != null) {
+                    java.util.Date fechaDate = java.util.Date.from(
+                            s.getFechaEstreno().atStartOfDay(java.time.ZoneId.systemDefault()).toInstant()
+                    );
+                    jDateChooser1.setDate(fechaDate);
+                } else {
+                    jDateChooser1.setDate(null);
+                }
+
+                // Bloquear el ID para proteger la llave primaria
+                txtID.setEditable(false);
+                JOptionPane.showMessageDialog(this, "Serie encontrada.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                enableCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró ninguna serie con el ID proporcionado.", "Sin Resultados", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_btnBuscarSerieActionPerformed
 
     private void txtDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracionActionPerformed
@@ -239,67 +260,68 @@ public class GUIActualizarSerie extends javax.swing.JFrame {
 
     private void btnActualizarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarSerieActionPerformed
         try {
-        // 1. Capturar datos base
-        String id = txtID.getText().trim();
-        String titulo = txtTitulo.getText().trim();
-        String duracionStr = txtDuracion.getText().trim();
-        String calificacionStr = txtCalificacion.getText().trim();
-        String temporadasStr = txtTemporadas.getText().trim();
-        String episodiosStr = txtEpisodiosPorTemporada.getText().trim();
+            // 1. Capturar datos base
+            String id = txtID.getText().trim();
+            String titulo = txtTitulo.getText().trim();
+            String duracionStr = txtDuracion.getText().trim();
+            String calificacionStr = txtCalificacion.getText().trim();
+            String temporadasStr = txtTemporadas.getText().trim();
+            String episodiosStr = txtEpisodiosPorTemporada.getText().trim();
 
-        // Capturar Fecha del JDateChooser
-        java.util.Date fechaSeleccionada = jDateChooser1.getDate();
+            // Capturar Fecha del JDateChooser
+            java.util.Date fechaSeleccionada = jDateChooser1.getDate();
 
-        // 2. Validaciones
-        if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty()
-                || calificacionStr.isEmpty() || temporadasStr.isEmpty() 
-                || episodiosStr.isEmpty() || fechaSeleccionada == null) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos, incluida la fecha de estreno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+            // 2. Validaciones
+            if (id.isEmpty() || titulo.isEmpty() || duracionStr.isEmpty()
+                    || calificacionStr.isEmpty() || temporadasStr.isEmpty()
+                    || episodiosStr.isEmpty() || fechaSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos, incluida la fecha de estreno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Convertir java.util.Date a java.time.LocalDate
+            java.time.LocalDate fechaEstreno = fechaSeleccionada.toInstant()
+                    .atZone(java.time.ZoneId.systemDefault())
+                    .toLocalDate();
+
+            // Parsear datos numéricos
+            int duracion = Integer.parseInt(duracionStr);
+            double calificacion = Double.parseDouble(calificacionStr);
+            int temporadas = Integer.parseInt(temporadasStr);
+            int episodios = Integer.parseInt(episodiosStr);
+
+            if (calificacion < 0.0 || calificacion > 10.0) {
+                JOptionPane.showMessageDialog(this,
+                        "La calificación debe ser un valor entre 0.0 y 10.0",
+                        "Calificación Inválida",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 3. Construir la entidad Serie usando Builder
+            Serie serieActualizada = Serie.builder()
+                    .id(id)
+                    .titulo(titulo)
+                    .duracionMinutos(duracion)
+                    .calificacion(calificacion)
+                    .fechaEstreno(fechaEstreno)
+                    .temporadas(temporadas)
+                    .episodios(episodios)
+                    .build();
+
+            // 4. Invocar actualización en el Servicio
+            servicio.updateContenido(serieActualizada);
+
+            JOptionPane.showMessageDialog(this, "Serie actualizada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarCampos();
+            txtID.setEditable(true);
+            disableCampos();
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La duración, calificación, temporadas y episodios deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Convertir java.util.Date a java.time.LocalDate
-        java.time.LocalDate fechaEstreno = fechaSeleccionada.toInstant()
-                .atZone(java.time.ZoneId.systemDefault())
-                .toLocalDate();
-
-        // Parsear datos numéricos
-        int duracion = Integer.parseInt(duracionStr);
-        double calificacion = Double.parseDouble(calificacionStr);
-        int temporadas = Integer.parseInt(temporadasStr);
-        int episodios = Integer.parseInt(episodiosStr);
-
-        if (calificacion < 0.0 || calificacion > 10.0) {
-            JOptionPane.showMessageDialog(this,
-                    "La calificación debe ser un valor entre 0.0 y 10.0",
-                    "Calificación Inválida",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // 3. Construir la entidad Serie usando Builder
-        Serie serieActualizada = Serie.builder()
-                .id(id)
-                .titulo(titulo)
-                .duracionMinutos(duracion)
-                .calificacion(calificacion)
-                .fechaEstreno(fechaEstreno)
-                .temporadas(temporadas)
-                .episodios(episodios)
-                .build();
-
-        // 4. Invocar actualización en el Servicio
-        ServicioContenido.getInstance().updateContenido(serieActualizada);
-
-        JOptionPane.showMessageDialog(this, "Serie actualizada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        limpiarCampos();
-        txtID.setEditable(true);
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "La duración, calificación, temporadas y episodios deben ser valores numéricos válidos.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnActualizarSerieActionPerformed
 
     /**

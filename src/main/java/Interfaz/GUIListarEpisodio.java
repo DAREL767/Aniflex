@@ -5,15 +5,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
-import servicios.IObservador;
 import servicios.ServicioContenido;
+import servicios.ICambiable;
+import servicios.ServicioObserver;
 
 /**
  * Caso de uso: Listar los objetos de la clase D (Episodio) asociados a una Serie.
  * Implementa IObservador para refrescarse automáticamente ante cualquier cambio
  * (igual que GUIListarPelicula / GUIListarSerie).
  */
-public class GUIListarEpisodio extends javax.swing.JFrame implements IObservador {
+public class GUIListarEpisodio extends javax.swing.JFrame implements ICambiable {
+    private final ServicioContenido servicio;
 
     private JTextField txtIdSerie;
     private JButton btnListar;
@@ -28,7 +30,8 @@ public class GUIListarEpisodio extends javax.swing.JFrame implements IObservador
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        ServicioContenido.getInstance().registrarObservador(this);
+        ServicioObserver.addGUIListar(this);
+        servicio = ServicioContenido.getInstance();
     }
 
     private void initComponents() {
@@ -61,7 +64,7 @@ public class GUIListarEpisodio extends javax.swing.JFrame implements IObservador
         DefaultTableModel modelo = (DefaultTableModel) tablaEpisodios.getModel();
         modelo.setRowCount(0);
         try {
-            List<Episodio> episodios = ServicioContenido.getInstance().listEpisodiosDeSerie(idSerieActual);
+            List<Episodio> episodios = servicio.listEpisodiosDeSerie(idSerieActual);
             for (Episodio e : episodios) {
                 modelo.addRow(new Object[]{e.getNoEpisodio(), e.getTitulo()});
             }
@@ -71,7 +74,7 @@ public class GUIListarEpisodio extends javax.swing.JFrame implements IObservador
     }
 
     @Override
-    public void notificarCambio() {
+    public void cambio() {
         cargarTablaEpisodios(); // se refresca sola si idSerieActual ya fue consultada
     }
 
