@@ -6,7 +6,7 @@
  *
  * @author jamed
  */
-package Model;
+package model;
 
 import lombok.Getter;
 import lombok.Setter;

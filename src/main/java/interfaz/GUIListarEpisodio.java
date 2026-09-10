@@ -1,6 +1,6 @@
-package Interfaz;
+package interfaz;
 
-import Model.Episodio;
+import model.Episodio;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

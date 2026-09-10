@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
+package interfaz;
 
-import Model.Pelicula;
-import Model.Serie;
+import model.Pelicula;
+import model.Serie;
 import java.time.format.DateTimeFormatter;
 import servicios.ServicioContenido;
 import javax.swing.JOptionPane;
@@ -14,15 +14,15 @@ import javax.swing.JOptionPane;
  *
  * @author Dan
  */
-public class GUIBuscarPelicula extends javax.swing.JFrame {
+public class GUIBuscarSerie extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIBuscarPelicula.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIBuscarSerie.class.getName());
     private final ServicioContenido servicio;
 
     /**
      * Creates new form GUIBuscarPelicula
      */
-    public GUIBuscarPelicula() {
+    public GUIBuscarSerie() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -46,7 +46,7 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
         txtFechaEstreno = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtRecaudacion = new javax.swing.JTextField();
+        txtEpisodios = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -54,17 +54,16 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         txtID1 = new javax.swing.JTextField();
-        txtEsSaga = new javax.swing.JTextField();
+        txtTemporadas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Búsqueda");
 
         jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
-        jLabel1.setText("Búsqueda de películas");
+        jLabel1.setText("Búsqueda de series");
 
         jTextFieldID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextFieldID.setToolTipText("");
 
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(this::jButtonBuscarActionPerformed);
@@ -78,19 +77,19 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
         txtFechaEstreno.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
 
         jLabel9.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel9.setText("Saga: ");
+        jLabel9.setText("Temporadas:");
 
         jLabel10.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel10.setText("Recaudación Taquilla: ");
+        jLabel10.setText("No. Episodios");
 
-        txtRecaudacion.setEditable(false);
-        txtRecaudacion.setToolTipText("0 si salio exclusivamente para plataformas");
+        txtEpisodios.setEditable(false);
+        txtEpisodios.setToolTipText("0 si salio exclusivamente para plataformas");
 
         jLabel2.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel2.setText("Título:");
 
         jLabel3.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel3.setText("Ingrese la ID de la película a buscar");
+        jLabel3.setText("ID:");
 
         jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabel4.setText("Duración:");
@@ -105,11 +104,11 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
 
         txtID1.setEditable(false);
 
-        txtEsSaga.setEditable(false);
-        txtEsSaga.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
+        txtTemporadas.setEditable(false);
+        txtTemporadas.setToolTipText("Ingrese la fecha en formato: dd/MM/yyyy (Ej: 25/12/2024)");
 
         jLabel7.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
-        jLabel7.setText("ID:");
+        jLabel7.setText("Ingrese la ID de la serie a buscar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,55 +117,48 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscar)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(77, 77, 77)
-                        .addComponent(txtDuracion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(65, 65, 65)
-                        .addComponent(txtCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel9)))
                         .addGap(48, 48, 48)
-                        .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(113, 113, 113)
-                        .addComponent(txtID1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(98, 98, 98)
-                        .addComponent(txtEsSaga, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtRecaudacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(95, 95, 95)
-                        .addComponent(txtTitulo))
-                    .addComponent(jLabel3))
-                .addGap(0, 53, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEpisodios, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTemporadas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFechaEstreno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCalificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jLabel7))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtID1)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtID1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTitulo)
@@ -191,14 +183,14 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
                     .addComponent(txtFechaEstreno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEsSaga))
+                    .addComponent(jLabel9)
+                    .addComponent(txtTemporadas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txtRecaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEpisodios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45))
         );
 
@@ -211,7 +203,7 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No ha ingresado un ID.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                Pelicula resultado = servicio.getInstance().searchPelicula(id);
+                Serie resultado = servicio.searchSerie(id);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 txtID1.setText(resultado.getId());
@@ -219,16 +211,11 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
                 txtDuracion.setText(String.valueOf(resultado.getDuracionMinutos()));
                 txtCalificacion.setText(String.format("%.2f", resultado.getCalificacion()));
                 txtFechaEstreno.setText(resultado.getFechaEstreno().format(formatter));
-                if(resultado.isEsSaga()){
-                    txtEsSaga.setText("Si");
-                }else{
-                    txtEsSaga.setText("No");
-                }
-                txtRecaudacion.setText(String.format("%.2f", resultado.getRecaudacionTaquilla()));
+                txtTemporadas.setText(String.valueOf(resultado.getTemporadas()));
+                txtEpisodios.setText(String.valueOf(resultado.getEpisodios()));
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-
         }
 
     }//GEN-LAST:event_jButtonBuscarActionPerformed
@@ -259,7 +246,7 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GUIBuscarPelicula().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GUIBuscarSerie().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,10 +263,10 @@ public class GUIBuscarPelicula extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField txtCalificacion;
     private javax.swing.JTextField txtDuracion;
-    private javax.swing.JTextField txtEsSaga;
+    private javax.swing.JTextField txtEpisodios;
     private javax.swing.JTextField txtFechaEstreno;
     private javax.swing.JTextField txtID1;
-    private javax.swing.JTextField txtRecaudacion;
+    private javax.swing.JTextField txtTemporadas;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

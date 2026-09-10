@@ -4,10 +4,10 @@
  */
 package servicios;
 
-import Model.Contenido;
-import Model.Episodio;
-import Model.Pelicula;
-import Model.Serie;
+import model.Contenido;
+import model.Episodio;
+import model.Pelicula;
+import model.Serie;
 
 import java.util.HashMap;
 import java.util.List;

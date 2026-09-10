@@ -2,27 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public abstract class Contenido {
-    private String id;
+@Builder
+public class Episodio {
+    private int noEpisodio;
     private String titulo;
-    private int duracionMinutos;
-    private double calificacion;
-    private LocalDate fechaEstreno;
-
-    public abstract String getDetalles();
-    public abstract double calcularRetencion();
 }

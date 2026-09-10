@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
+package interfaz;
 
-import Model.Episodio;
+import model.Episodio;
 import javax.swing.JOptionPane;
 import servicios.ServicioContenido;
 
@@ -89,8 +89,7 @@ public class GUIActualizarEpisodio extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIdSerie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNoEpisodio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(22, 22, 22)))
+                                    .addComponent(txtNoEpisodio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

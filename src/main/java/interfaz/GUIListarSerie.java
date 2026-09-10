@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Interfaz;
+package interfaz;
 
-import Model.Contenido;
-import Model.Pelicula;
+import model.Contenido;
+import model.Serie;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -17,55 +17,54 @@ import servicios.ServicioObserver;
  *
  * @author jamed
  */
-public class GUIListarPelicula extends javax.swing.JFrame implements ICambiable {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarPelicula.class.getName());
+public class GUIListarSerie extends javax.swing.JFrame implements ICambiable {
+
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIListarSerie.class.getName());
     private final ServicioContenido servicio;
 
     /**
-     * Creates new form GUIListarPelicula
+     * Creates new form GUIListarSerie
      */
-    public GUIListarPelicula() {
+    public GUIListarSerie() {
         initComponents();
         this.setResizable(false);
-        this.pack(); 
+        this.pack();
         this.setLocationRelativeTo(null);
         
         ServicioObserver.addGUIListar(this);
         servicio = ServicioContenido.getInstance();
-        cargarTablaPeliculas();
+        cargarTablaSeries();
     }
     
-    // Método que actualiza la tabla (extraído para reusar)
-    public void cargarTablaPeliculas() {
-        DefaultTableModel modelo = (DefaultTableModel) tablaPeliculas.getModel();
+    public void cargarTablaSeries() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaSeries.getModel();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         modelo.setRowCount(0);
 
         modelo.setColumnIdentifiers(new String[]{
-            "ID", "Título", "Duración", "Calificación", "Estreno", "Es Saga", "Taquilla", "Alquiler"
+        "ID", "Título", "Duración", "Calificación", "Estreno", "Temporadas", "No. Episodios"
         });
 
-        Map<String, Contenido> peliculas = servicio.getPeliculas();
-        if (peliculas != null) {
-            for (Map.Entry<String, Contenido> c : peliculas.entrySet()) {
-                if (c.getValue() instanceof Pelicula) {
-                Pelicula p = (Pelicula) c.getValue();
+        Map<String, Contenido> series = servicio.getSeries();
+        if (series != null) {
+            for (Map.Entry<String, Contenido> c : series.entrySet()) {
+                if (c.getValue() instanceof Serie) {
+                Serie s = (Serie) c.getValue();
                 Object[] fila = new Object[]{
-                    p.getId(),
-                    p.getTitulo(),
-                    p.getDuracionMinutos() + " min",
-                    p.getCalificacion() + " ★",
-                    p.getFechaEstreno() != null ? p.getFechaEstreno().format(formatter) : "",
-                    p.isEsSaga() ? "Sí" : "No",
-                    "$" + String.format("%.2f", p.getRecaudacionTaquilla()),
-                    "$" + String.format("%.2f", p.calcularAlquiler())
+                s.getId(),
+                s.getTitulo(),
+                s.getDuracionMinutos() + " min",
+                s.getCalificacion() + " ★",
+                s.getFechaEstreno().format(formatter),
+                s.getTemporadas(),
+                s.getEpisodios()
                 };
                 modelo.addRow(fila);
             }
         }
     }
 }
+    
     
 
     /**
@@ -79,16 +78,16 @@ public class GUIListarPelicula extends javax.swing.JFrame implements ICambiable 
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaPeliculas = new javax.swing.JTable();
-        btnListarPelicula = new javax.swing.JButton();
+        tablaSeries = new javax.swing.JTable();
+        btnListarSerie = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Listado de Peliculas");
+        setTitle("Listado de Series");
 
         jLabel1.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
-        jLabel1.setText("Películas en Aniflex");
+        jLabel1.setText("Series en Aniflex");
 
-        tablaPeliculas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSeries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,42 +98,48 @@ public class GUIListarPelicula extends javax.swing.JFrame implements ICambiable 
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaPeliculas);
+        jScrollPane1.setViewportView(tablaSeries);
 
-        btnListarPelicula.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnListarPelicula.setText("Ver Películas");
-        btnListarPelicula.addActionListener(this::btnListarPeliculaActionPerformed);
+        btnListarSerie.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnListarSerie.setText("Ver series");
+        btnListarSerie.addActionListener(this::btnListarSerieActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(btnListarPelicula)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(215, 215, 215)
+                .addComponent(jLabel1)
+                .addContainerGap(225, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnListarSerie)
+                        .addGap(249, 249, 249))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnListarPelicula)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnListarSerie)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnListarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarPeliculaActionPerformed
-        cargarTablaPeliculas();
-    }//GEN-LAST:event_btnListarPeliculaActionPerformed
+    private void btnListarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarSerieActionPerformed
+        cargarTablaSeries();
+    }//GEN-LAST:event_btnListarSerieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,19 +163,19 @@ public class GUIListarPelicula extends javax.swing.JFrame implements ICambiable 
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GUIListarPelicula().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GUIListarSerie().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnListarPelicula;
+    private javax.swing.JButton btnListarSerie;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaPeliculas;
+    private javax.swing.JTable tablaSeries;
     // End of variables declaration//GEN-END:variables
 
 
     @Override
     public void cambio() {
-        cargarTablaPeliculas();
+        cargarTablaSeries();
     }
 }
